@@ -10,4 +10,3 @@ int Get_trace(Matrix A);
 int Get_rank(Matrix A);
 
 #endif__FUNCTIONS_H_
-#define _FUNCTIONS_H_
