@@ -2,6 +2,7 @@
 #define _FUNCTIONS_H_
 #include "struct.h"
 
+Matrix Allocation(Matrix A);
 Matrix SUM(Matrix A, Matrix B);
 Matrix Product(Matrix A, Matrix B);
 Matrix Transpose(Matrix A);
