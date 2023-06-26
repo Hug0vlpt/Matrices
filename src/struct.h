@@ -2,6 +2,8 @@
 #define __STRUCT_H_
 
 typedef struct {
+  //the array that contains the elements of the Matrix
+  int* arr;
   //number of rows
   int nb_r; 
   //number of columns
