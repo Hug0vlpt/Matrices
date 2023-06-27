@@ -1,14 +1,14 @@
 #ifndef __FUNCTIONS_H_
-#define _FUNCTIONS_H_
+#define __FUNCTIONS_H_
 #include "struct.h"
 
-Matrix Allocation(Matrix A);
-Matrix SUM(Matrix A, Matrix B);
-Matrix Product(Matrix A, Matrix B);
-Matrix Transpose(Matrix A);
-Matrix Invert(Matrix A);
+Matrix Allocation();
+void Sum();
+void Product(Matrix A, Matrix B);
+void Transpose(Matrix A);
+void Invert(Matrix A);
 
-int Get_trace(Matrix A);
-int Get_rank(Matrix A);
+void Get_trace(Matrix A);
+void Get_rank(Matrix A);
 
-#endif__FUNCTIONS_H_
+#endif 
