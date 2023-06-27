@@ -3,11 +3,12 @@
 
 typedef struct {
   //the array that contains the elements of the Matrix
-  int* arr;
+  int** arr;
   //number of rows
   int nb_r; 
   //number of columns
   int nb_c;
+  //value of the trace of the matrix
   int trace;
   //value of the rank
   int rk;
