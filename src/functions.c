@@ -13,6 +13,20 @@ int** Allocation(int nb_r, int nb_c)
   return arr;
 }
 
+Matrix Get_sum(Matrix A, Matrix B){
+  Matrix C;
+  C.nb_r = A.nb_r;
+  C.nb_c = A.nb_c;
+  C.arr = Allocation(C.nb_r, C.nb_c);
+
+  for (int i=0; i<A.nb_r; ++i){
+    for (int j=0; j<A.nb_r; ++j){
+      C.arr[i][j] = A.arr[i][j] + B.arr[i][j];
+    }
+  }
+  return C;
+}
+
 void Sum()
 {
   Matrix A,B,C;
@@ -29,15 +43,8 @@ void Sum()
   printf("\nThe matrix B:\n");
   enterValues(&B);
 
-  C.nb_r = A.nb_r;
-  C.nb_c = B.nb_c;
-  C.arr = Allocation(C.nb_r, C.nb_c);
+  C = Get_sum(A,B);
 
-  for (int i=0; i<A.nb_r; ++i){
-    for (int j=0; j<A.nb_r; ++j){
-      C.arr[i][j] = A.arr[i][j] + B.arr[i][j];
-    }
-  }
   printf("\n");
   display_Matrix(A);
   printf("\n  +\n\n");
@@ -45,6 +52,24 @@ void Sum()
   printf("\n  =\n\n");
   display_Matrix(C);
   printf("\n");
+}
+
+Matrix Get_product(Matrix A, Matrix B){
+  Matrix C;
+  C.nb_r = A.nb_r;
+  C.nb_c = B.nb_c;
+  C.arr = Allocation(C.nb_r, C.nb_c);
+
+  for (int i=0; i<A.nb_r; ++i){
+    for (int j=0; j<B.nb_c; ++j){
+      int sum = 0;
+      for (int k=0; k<A.nb_c; ++k){
+        sum += A.arr[i][k] * B.arr[k][j];
+      }
+      C.arr[i][j] = sum;
+    }
+  }
+  return C;
 }
 
 void Product()
@@ -66,22 +91,11 @@ void Product()
     }
   } while(B.nb_c<1);
   B.arr = Allocation(B.nb_r, B.nb_c);
+  printf("\n");
   enterValues(&B);
 
-  C.nb_r = A.nb_r;
-  C.nb_c = B.nb_c;
-  C.arr = Allocation(C.nb_r, C.nb_c);
+  C = Get_product(A,B);
 
-  for (int i=0; i<A.nb_r; ++i){
-    for (int j=0; j<B.nb_c; ++j){
-      int sum = 0;
-      for (int k=0; k<A.nb_c; ++k){
-        sum += A.arr[i][k] * B.arr[k][j];
-      }
-      C.arr[i][j] = sum;
-    }
-  }
-  
   printf("\n");
   display_Matrix(A);
   printf("\n  *\n\n");
