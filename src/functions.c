@@ -3,8 +3,7 @@
 #include "struct.h"
 #include "user.h"
 
-int** Allocation(int nb_r, int nb_c)
-{
+int** AllocationArr(int nb_r, int nb_c){
   int** arr = malloc(nb_r *sizeof(int*));
   
   for (int i=0; i<nb_r; ++i){
@@ -13,11 +12,17 @@ int** Allocation(int nb_r, int nb_c)
   return arr;
 }
 
+Matrix newMatrix(int nb_r, int nb_c){
+  Matrix A;
+  A.nb_r = nb_r;
+  A.nb_c = nb_c;
+  A.arr = AllocationArr(nb_r, nb_c);
+
+  return A;
+}
+
 Matrix Get_sum(Matrix A, Matrix B){
-  Matrix C;
-  C.nb_r = A.nb_r;
-  C.nb_c = A.nb_c;
-  C.arr = Allocation(C.nb_r, C.nb_c);
+  Matrix C = newMatrix(A.nb_r, A.nb_c);
 
   for (int i=0; i<A.nb_r; ++i){
     for (int j=0; j<A.nb_r; ++j){
@@ -34,15 +39,15 @@ void Sum()
   printf("The matrix A:\n\n");
   Size(&A);
   printf("\n");
-  A.arr = Allocation(A.nb_r, A.nb_c);
+  A.arr = AllocationArr(A.nb_r, A.nb_c);
   enterValues(&A);  
 
   B.nb_r = A.nb_r;
   B.nb_c = A.nb_c;
-  B.arr = Allocation(B.nb_r, B.nb_c);
+  B.arr = AllocationArr(B.nb_r, B.nb_c);
   printf("\nThe matrix B:\n");
   enterValues(&B);
-
+  
   C = Get_sum(A,B);
 
   printf("\n");
@@ -55,10 +60,7 @@ void Sum()
 }
 
 Matrix Get_product(Matrix A, Matrix B){
-  Matrix C;
-  C.nb_r = A.nb_r;
-  C.nb_c = B.nb_c;
-  C.arr = Allocation(C.nb_r, C.nb_c);
+  Matrix C = newMatrix(A.nb_r, B.nb_c);
 
   for (int i=0; i<A.nb_r; ++i){
     for (int j=0; j<B.nb_c; ++j){
@@ -78,7 +80,8 @@ void Product()
 
   printf("The matrix A:\n");
   Size(&A);
-  A.arr = Allocation(A.nb_r, A.nb_c);
+  A.arr = AllocationArr(A.nb_r, A.nb_c);
+  printf("\n");
   enterValues(&A);  
 
   printf("\nThe matrix B:\n");
@@ -90,7 +93,7 @@ void Product()
       printf("Please enter a number upper or equal to 1.\n");
     }
   } while(B.nb_c<1);
-  B.arr = Allocation(B.nb_r, B.nb_c);
+  B.arr = AllocationArr(B.nb_r, B.nb_c);
   printf("\n");
   enterValues(&B);
 
@@ -126,7 +129,7 @@ void Trace()
   } while(A.nb_r<1);
   A.nb_c = A.nb_r;
 
-  A.arr = Allocation(A.nb_r, A.nb_c);
+  A.arr = AllocationArr(A.nb_r, A.nb_c);
   printf("\n");
   enterValues(&A);
   printf("\n");

@@ -2,7 +2,7 @@
 #define __FUNCTIONS_H_
 #include "struct.h"
 
-int** Allocation();
+Matrix createMatrix(int nb_r, int nb_c);
 
 void Sum();
 void Product();
