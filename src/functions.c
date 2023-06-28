@@ -3,49 +3,88 @@
 #include "struct.h"
 #include "user.h"
 
-Matrix Allocation(int nb_r, int nb_c)
+int** Allocation(int nb_r, int nb_c)
 {
-  Matrix A;
-  A.arr = malloc(nb_r *sizeof(int*));
+  int** arr = malloc(nb_r *sizeof(int*));
   
   for (int i=0; i<nb_r; ++i){
-    A.arr[i] = malloc(nb_c *sizeof(int));
+    arr[i] = malloc(nb_c *sizeof(int));
   }
-  A.nb_r = nb_r;
-  A.nb_c = nb_c;
-  return A;
+  return arr;
 }
 
 void Sum()
 {
-  Matrix A;
-  Matrix B;
-  Matrix C;
+  Matrix A,B,C;
   
   printf("The first matrix:\n");
   Size(&A);
-  A = Allocation(A.nb_r, A.nb_c);
+  A.arr = Allocation(A.nb_r, A.nb_c);
   printf("\nThe matrix A:\n");
   enterValues(&A);  
 
   B.nb_r = A.nb_r;
   B.nb_c = A.nb_c;
-  B = Allocation(B.nb_r, B.nb_c);
+  B.arr = Allocation(B.nb_r, B.nb_c);
   printf("\nThe matrix B:\n");
   enterValues(&B);
 
   C.nb_r = A.nb_r;
-  C.nb_c = A.nb_c;
-  C = Allocation(C.nb_r, C.nb_c);
+  C.nb_c = B.nb_c;
+  C.arr = Allocation(C.nb_r, C.nb_c);
 
   for (int i=0; i<A.nb_r; ++i){
     for (int j=0; j<A.nb_r; ++j){
       C.arr[i][j] = A.arr[i][j] + B.arr[i][j];
     }
   }
-printf("\n");
+  printf("\n");
   display_Matrix(A);
   printf("\n  +\n\n");
+  display_Matrix(B);
+  printf("\n  =\n\n");
+  display_Matrix(C);
+  printf("\n");
+}
+
+void Product()
+{
+  Matrix A,B,C;
+
+  printf("The matrix A:\n");
+  Size(&A);
+  A.arr = Allocation(A.nb_r, A.nb_c);
+  enterValues(&A);  
+
+  printf("\nThe matrix B:\n");
+  B.nb_r = A.nb_c;
+  do {
+    printf("Enter the number of columns of the matrix B: ");
+    scanf("%d", &B.nb_c);
+    if (B.nb_c<1){
+      printf("Please enter a number upper or equal to 1.\n");
+    }
+  } while(B.nb_c<1);
+  B.arr = Allocation(B.nb_r, B.nb_c);
+  enterValues(&B);
+
+  C.nb_r = A.nb_r;
+  C.nb_c = B.nb_c;
+  C.arr = Allocation(C.nb_r, C.nb_c);
+
+  for (int i=0; i<A.nb_r; ++i){
+    for (int j=0; j<B.nb_c; ++j){
+      int sum = 0;
+      for (int k=0; k<A.nb_c; ++k){
+        sum += A.arr[i][k] * B.arr[k][j];
+      }
+      C.arr[i][j] = sum;
+    }
+  }
+  
+  printf("\n");
+  display_Matrix(A);
+  printf("\n  *\n\n");
   display_Matrix(B);
   printf("\n  =\n\n");
   display_Matrix(C);
