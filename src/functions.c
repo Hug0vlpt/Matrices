@@ -17,10 +17,10 @@ void Sum()
 {
   Matrix A,B,C;
   
-  printf("The first matrix:\n");
+  printf("The matrix A:\n\n");
   Size(&A);
+  printf("\n");
   A.arr = Allocation(A.nb_r, A.nb_c);
-  printf("\nThe matrix A:\n");
   enterValues(&A);  
 
   B.nb_r = A.nb_r;
@@ -89,4 +89,35 @@ void Product()
   printf("\n  =\n\n");
   display_Matrix(C);
   printf("\n");
+}
+
+void Get_trace(Matrix* A)
+{
+  int trace = 0;
+  for (int i=0; i<A->nb_r; ++i){
+    trace += A->arr[i][i];
+  }
+  A->trace = trace;
+}
+
+void Trace()
+{
+  Matrix A;
+  do {
+    printf("Enter the size of the matrix: ");
+    scanf("%d", &A.nb_r);
+    if (A.nb_r<1){
+      printf("Please enter a size upper or equal to 1.\n");
+    }
+  } while(A.nb_r<1);
+  A.nb_c = A.nb_r;
+
+  A.arr = Allocation(A.nb_r, A.nb_c);
+  printf("\n");
+  enterValues(&A);
+  printf("\n");
+  display_Matrix(A);
+
+  Get_trace(&A);
+  printf("\nThe trace of the matrix A is equal to %d.\n\n",A.trace);
 }

@@ -7,8 +7,8 @@ void Sum();
 void Product();
 void Transpose(Matrix A);
 void Invert(Matrix A);
-
-void Get_trace(Matrix A);
+void Trace();
+void Get_trace(Matrix* A);
 void Get_rank(Matrix A);
 
 #endif 
