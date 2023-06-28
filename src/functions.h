@@ -2,9 +2,9 @@
 #define __FUNCTIONS_H_
 #include "struct.h"
 
-Matrix Allocation();
+int** Allocation();
 void Sum();
-void Product(Matrix A, Matrix B);
+void Product();
 void Transpose(Matrix A);
 void Invert(Matrix A);
 
