@@ -7,16 +7,17 @@ void display_options()
 {
   int option;
   do{
-    printf("Which action do you want to do ? Sum (1)/ : ");
+    printf("Which action do you want to do ? Sum (enter 1)/ Product (enter 2) : ");
     scanf("%d",&option);
     clearBuffer();
-    if (option<0 || option>1){
-      printf("Please enter a number between 1 and 9\n");
+    if (option<0 || option>2){
+      printf("Please enter a number between 1 and 2\n");
     }
-  } while(option<0 || option>1);
+  } while(option<0 || option>2);
 
   switch(option){
-    case 1: Sum(); break;        
+    case 1: Sum(); break;    
+    case 2: Product(); break;
   }
 }
 
