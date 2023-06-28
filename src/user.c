@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "user.h"
 #include "struct.h"
 #include "functions.h"
@@ -7,17 +8,19 @@ void display_options()
 {
   int option;
   do{
-    printf("Which action do you want to do ? Sum (enter 1)/ Product (enter 2) : ");
+    printf("Which action do you want to do ? Sum (enter 1)/ Product (enter 2)/ Trace (enter 3): ");
     scanf("%d",&option);
     clearBuffer();
-    if (option<0 || option>2){
-      printf("Please enter a number between 1 and 2\n");
+    if (option<0 || option>3){
+      printf("Please enter a number between 1 and 3\n");
     }
-  } while(option<0 || option>2);
-
+  } while(option<0 || option>3);
+  system("clear");
+  
   switch(option){
     case 1: Sum(); break;    
     case 2: Product(); break;
+    case 3: Trace(); break;
   }
 }
 
