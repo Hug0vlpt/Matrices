@@ -138,3 +138,35 @@ void Trace()
   Get_trace(&A);
   printf("\nThe trace of the matrix A is equal to %d.\n\n",A.trace);
 }
+
+Matrix Get_transpose(Matrix A){
+  Matrix T = newMatrix(A.nb_c, A.nb_r); 
+
+  for (int i=0; i<A.nb_r; ++i){
+    for (int j=0; j<A.nb_c; ++j){
+      T.arr[j][i] = A.arr[i][j];
+    }
+  }
+  return T;
+}
+
+void Transpose()
+{
+  Matrix A, T;
+  Size(&A);
+  A.arr = AllocationArr(A.nb_r, A.nb_c);
+
+  printf("\n");
+  enterValues(&A);
+
+  T = Get_transpose(A);
+  
+  printf("%d:\n",A.arr[0][1]);
+
+  printf("\nThe transpose of\n");
+  printf("\n");
+  display_Matrix(A);
+  printf("\nis\n\n");
+  display_Matrix(T);
+  printf("\n");
+}
