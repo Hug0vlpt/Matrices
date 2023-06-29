@@ -12,6 +12,11 @@ typedef struct {
   int trace;
   //value of the rank
   int rk;
+  //is the matrix a row one?
+  int is_row;
+  //is the matrix a column one?
+  int is_column;
+  //is the matrix a null one?
   int is_null;
   //is the matrix a square?
   int is_sq;
