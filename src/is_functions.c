@@ -33,3 +33,31 @@ void is_Column()
     A->is_column = 0;
   }
 }
+
+void is_Null()
+{
+  Matrix* A = malloc(sizeof(Matrix));
+  Size(A);
+  A->arr = AllocationArr(A->nb_r, A->nb_c);
+  printf("\n");
+  enterValues(A);
+  
+  int nb_zeros = 0;
+  for(int i=0; i<A->nb_r; ++i){
+    for (int j=0; j<A->nb_c; ++j){
+      if (A->arr[i][j] == 0){
+        nb_zeros++;
+      } else {
+        break;
+      }
+    }
+  }
+
+  if (nb_zeros == (A->nb_r * A->nb_c)){
+    A->is_null = 1;
+    printf("\nThe matrix is null.\n\n");
+  } else {
+    A->is_null = 0;
+    printf("\nThe matrix isn't null.\n\n");
+  }
+}
