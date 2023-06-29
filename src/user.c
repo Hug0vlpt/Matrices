@@ -15,10 +15,10 @@ void display_operations1m(){
   do{
     printf("Which operation do you want to perform ?\n\n  - Trace (enter 1)\n\nEnter a number between 1 and 2: ");
     scanf("%d",&operation);
-    if (operation<0 || operation>2){
+    if (operation<1 || operation>2){
       printf("Please enter a number between 1 and 2\n");
     }
-  } while(operation<0 || operation>2);
+  } while(operation<1 || operation>2);
   system("clear");
   
   switch(operation){
@@ -32,12 +32,12 @@ void display_operations2m(){
   do{
     printf("Which operation do you want to perform ?\n\n  - Sum (enter 1)\n  - Product (enter 2)\n\nEnter a number between 1 and 2: ");
     scanf("%d",&operation);
-    if (operation<0 || operation>2){
+    if (operation<1 || operation>2){
       system("clear");
       printf("Please enter a number between 1 and 2\n\n");
       clearBuffer();
     }
-  } while(operation<0 || operation>2);
+  } while(operation<1 || operation>2);
   system("clear");
   
   switch(operation){
@@ -51,12 +51,12 @@ void display_findMatrix(){
   do{
     printf("Which matrix do you want to find based on a matrix?\n\n  - Transpose (enter 1)\n\nEnter a number between 1 and 2: ");
     scanf("%d",&option);
-    if (option<0 || option>2){
+    if (option<1 || option>2){
       system("clear");
       printf("Please enter a number between 1 and 2\n\n");
       clearBuffer();
     }
-  } while(option<0 || option>2);
+  } while(option<1 || option>2);
   system("clear");
   
   switch(option){
@@ -68,19 +68,20 @@ void display_findMatrix(){
 void display_checkTypes(){ 
  int type;
   do{
-    printf("Which type do you want to test with a matrix ?\n\n  - Row matrix (enter 1)\n  - Column matrix (enter 2)\n\nEnter a number between 1 and 2: ");
+    printf("Which type do you want to test with a matrix ?\n\n  - Row matrix (enter 1)\n  - Column matrix (enter 2)\n  - Null matrix\n\nEnter a number between 1 and 3: ");
     scanf("%d",&type);
-    if (type<0 || type>2){
+    if (type<1 || type>3){
       system("clear");
-      printf("Please enter a number between 1 and 2\n\n");
+      printf("Please enter a number between 1 and 3\n\n");
       clearBuffer();
     }
-  } while(type<0 || type>2);
+  } while(type<1 || type>3);
   system("clear");
   
   switch(type){
     case 1: is_Row(); break;    
     case 2: is_Column(); break;
+    case 3: is_Null(); break;
   }
 } 
 
