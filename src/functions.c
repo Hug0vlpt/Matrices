@@ -25,7 +25,7 @@ Matrix Get_sum(Matrix A, Matrix B){
   Matrix C = newMatrix(A.nb_r, A.nb_c);
 
   for (int i=0; i<A.nb_r; ++i){
-    for (int j=0; j<A.nb_r; ++j){
+    for (int j=0; j<A.nb_c; ++j){
       C.arr[i][j] = A.arr[i][j] + B.arr[i][j];
     }
   }
