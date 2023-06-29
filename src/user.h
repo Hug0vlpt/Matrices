@@ -3,6 +3,9 @@
 #include "struct.h"
 
 void display_options();
+void display_operations1m();
+void display_operations2m();
+void display_findMatrix();
 void Size(Matrix* A);
 void enterValues(Matrix* A);
 void clearBuffer();
