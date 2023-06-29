@@ -3,6 +3,7 @@
 #include "struct.h"
 
 Matrix createMatrix(int nb_r, int nb_c);
+int** AllocationArr(int nb_r, int nb_c);
 
 void Sum();
 void Product();
