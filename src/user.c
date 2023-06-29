@@ -5,7 +5,6 @@
 #include "functions.h"
 #include "is_functions.h"
 
-
 void clearBuffer() {
   char c;
   while ((c = getchar()) != '\n' && c != EOF);
@@ -28,14 +27,15 @@ void display_operations1m(){
   }
 } 
  
-
 void display_operations2m(){
  int operation;
   do{
     printf("Which operation do you want to perform ? Sum (enter 1)\nProduct (enter 2): ");
     scanf("%d",&operation);
     if (operation<0 || operation>2){
-      printf("\nPlease enter a number between 1 and 2\n");
+      system("clear");
+      printf("\nPlease enter a number between 1 and 2\n\n");
+      clearBuffer();
     }
   } while(operation<0 || operation>2);
   system("clear");
@@ -52,7 +52,9 @@ void display_findMatrix(){
     printf("Which matrix do you want to find based on a matrix? Transpose (enter 1): ");
     scanf("%d",&option);
     if (option<0 || option>2){
-      printf("\nPlease enter a number between 1 and 2\n");
+      system("clear");
+      printf("\nPlease enter a number between 1 and 2\n\n");
+      clearBuffer();
     }
   } while(option<0 || option>2);
   system("clear");
@@ -69,7 +71,9 @@ void display_checkTypes(){
     printf("Which type do you want to test with a matrix ?\nRow Matrix (enter 1): ");
     scanf("%d",&type);
     if (type<0 || type>2){
-      printf("\nPlease enter a number between 1 and 2\n");
+      system("clear");
+      printf("\nPlease enter a number between 1 and 2\n\n");
+      clearBuffer();
     }
   } while(type<0 || type>2);
   system("clear");
@@ -86,11 +90,13 @@ void display_options()
     printf("Which action do you want to do ?\nPerform an operation on a matrix (enter 1)\nPerform operations between two matrices (enter 2)\nFind another matrix with a matrice (enter3)\nCheck if a matrix is a certain type (enter 4)\nEnter a number between 1 and 4: ");
     scanf("%d",&option);
     if (option<1 || option>4){
-      printf("\nPlease enter a number between 1 and 4\n");
+      system("clear"); 
+      printf("\nPlease enter a number between 1 and 4\n\n");
+      clearBuffer();
     }
   } while(option<1 || option>4);
-  system("clear");
-  
+    system("clear");
+
   switch(option){
     case 1: display_operations1m(); break;    
     case 2: display_operations2m(); break;
