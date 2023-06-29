@@ -13,7 +13,7 @@ void clearBuffer() {
 void display_operations1m(){
  int operation;
   do{
-    printf("Which operation do you want to perform ? Trace (enter 1): ");
+    printf("Which operation do you want to perform ?\n\n  - Trace (enter 1)\n\nEnter a number between 1 and 2: ");
     scanf("%d",&operation);
     if (operation<0 || operation>2){
       printf("Please enter a number between 1 and 2\n");
@@ -30,11 +30,11 @@ void display_operations1m(){
 void display_operations2m(){
  int operation;
   do{
-    printf("Which operation do you want to perform ? Sum (enter 1)\nProduct (enter 2): ");
+    printf("Which operation do you want to perform ?\n\n  - Sum (enter 1)\n  - Product (enter 2)\n\nEnter a number between 1 and 2: ");
     scanf("%d",&operation);
     if (operation<0 || operation>2){
       system("clear");
-      printf("\nPlease enter a number between 1 and 2\n\n");
+      printf("Please enter a number between 1 and 2\n\n");
       clearBuffer();
     }
   } while(operation<0 || operation>2);
@@ -49,11 +49,11 @@ void display_operations2m(){
 void display_findMatrix(){ 
  int option;
   do{
-    printf("Which matrix do you want to find based on a matrix? Transpose (enter 1): ");
+    printf("Which matrix do you want to find based on a matrix?\n\n  - Transpose (enter 1)\n\nEnter a number between 1 and 2: ");
     scanf("%d",&option);
     if (option<0 || option>2){
       system("clear");
-      printf("\nPlease enter a number between 1 and 2\n\n");
+      printf("Please enter a number between 1 and 2\n\n");
       clearBuffer();
     }
   } while(option<0 || option>2);
@@ -68,11 +68,11 @@ void display_findMatrix(){
 void display_checkTypes(){ 
  int type;
   do{
-    printf("Which type do you want to test with a matrix ?\nRow Matrix (enter 1): ");
+    printf("Which type do you want to test with a matrix ?\n\n  - Row matrix (enter 1)\n  - Column matrix (enter 2)\n\nEnter a number between 1 and 2: ");
     scanf("%d",&type);
     if (type<0 || type>2){
       system("clear");
-      printf("\nPlease enter a number between 1 and 2\n\n");
+      printf("Please enter a number between 1 and 2\n\n");
       clearBuffer();
     }
   } while(type<0 || type>2);
@@ -80,6 +80,7 @@ void display_checkTypes(){
   
   switch(type){
     case 1: is_Row(); break;    
+    case 2: is_Column(); break;
   }
 } 
 
@@ -87,7 +88,7 @@ void display_options()
 {
   int option;
   do{
-    printf("Which action do you want to do ?\nPerform an operation on a matrix (enter 1)\nPerform operations between two matrices (enter 2)\nFind another matrix with a matrice (enter3)\nCheck if a matrix is a certain type (enter 4)\nEnter a number between 1 and 4: ");
+    printf("Which action do you want to do ?\n\n  - Perform an operation on a matrix (enter 1)\n  - Perform operations between two matrices (enter 2)\n  - Find another matrix with a matrice (enter 3)\n  - Check if a matrix is a certain type (enter 4)\n\nEnter a number between 1 and 4: ");
     scanf("%d",&option);
     if (option<1 || option>4){
       system("clear"); 
