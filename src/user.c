@@ -41,6 +41,25 @@ void display_operations2m(){
   }
 } 
 
+void display_findMatrix(){ 
+ int option;
+  do{
+    printf("Which matrix do you want to find based on a matrix? Transpose (enter 1): ");
+    scanf("%d",&option);
+    clearBuffer();
+    if (option<0 || option>2){
+      printf("Please enter a number between 1 and 2\n");
+    }
+  } while(option<0 || option>2);
+  system("clear");
+  
+  switch(option){
+    case 1: Transpose(); break;    
+    //case 2: Invert(); break;
+  }
+} 
+
+
 void display_options()
 {
   int option;
@@ -57,7 +76,7 @@ void display_options()
   switch(option){
     case 1: display_operations1m(); break;    
     case 2: display_operations2m(); break;
-    //case 3: display_findMatrix(); break;
+    case 3: display_findMatrix(); break;
     //case 4: display_checkTypes(); break;
   }
 }
