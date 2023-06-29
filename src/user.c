@@ -4,23 +4,61 @@
 #include "struct.h"
 #include "functions.h"
 
+void display_operations1m(){
+ int operation;
+  do{
+    printf("Which operation do you want to perform ? Trace (enter 1): ");
+    scanf("%d",&operation);
+    clearBuffer();
+    if (operation<0 || operation>2){
+      printf("Please enter a number between 1 and 2\n");
+    }
+  } while(operation<0 || operation>2);
+  system("clear");
+  
+  switch(operation){
+    case 1: Trace(); break;    
+    //case 2: Rank(); break;
+  }
+} 
+ 
+
+void display_operations2m(){
+ int operation;
+  do{
+    printf("Which operation do you want to perform ? Sum (enter 1)/ Product (enter 2): ");
+    scanf("%d",&operation);
+    clearBuffer();
+    if (operation<0 || operation>2){
+      printf("Please enter a number between 1 and 2\n");
+    }
+  } while(operation<0 || operation>2);
+  system("clear");
+  
+  switch(operation){
+    case 1: Sum(); break;    
+    case 2: Product(); break;
+  }
+} 
+
 void display_options()
 {
   int option;
   do{
-    printf("Which action do you want to do ? Sum (enter 1)/ Product (enter 2)/ Trace (enter 3): ");
+    printf("Which action do you want to do ?\nPerform an operation on a matrix (enter 1)\nPerform operations between two matrices (enter 2)\nFind another matrix with a matrice (enter3)\nCheck if a matrix is a certain type (enter 4)\nEnter a number between 1 and 4: ");
     scanf("%d",&option);
     clearBuffer();
-    if (option<0 || option>3){
-      printf("Please enter a number between 1 and 3\n");
+    if (option<0 || option>4){
+      printf("Please enter a number between 1 and 4\n");
     }
-  } while(option<0 || option>3);
+  } while(option<0 || option>4);
   system("clear");
   
   switch(option){
-    case 1: Sum(); break;    
-    case 2: Product(); break;
-    case 3: Trace(); break;
+    case 1: display_operations1m(); break;    
+    case 2: display_operations2m(); break;
+    //case 3: display_findMatrix(); break;
+    //case 4: display_checkTypes(); break;
   }
 }
 
