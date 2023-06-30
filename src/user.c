@@ -78,21 +78,23 @@ void display_checkTypes(){
     printf("Which type do you want to test with a matrix ?\n\n"
         "  - Row matrix (enter 1)\n"
         "  - Column matrix (enter 2)\n"
-        "  - Null matrix\n\n"
-        "Enter a number between 1 and 3: ");
+        "  - Null matrix (enter 3)\n"
+        "  - Square Matrix (enter 4)\n\n"
+        "Enter a number between 1 and 4: ");
     scanf("%d",&type);
-    if (type<1 || type>3){
+    if (type<1 || type>4){
       system("clear");
-      printf("Please enter a number between 1 and 3\n\n");
+      printf("Please enter a number between 1 and 4\n\n");
       clearBuffer();
     }
-  } while(type<1 || type>3);
+  } while(type<1 || type>4);
   system("clear");
   
   switch(type){
     case 1: is_Row(); break;    
     case 2: is_Column(); break;
     case 3: is_Null(); break;
+    case 4: is_Square(); break;
   }
 } 
 

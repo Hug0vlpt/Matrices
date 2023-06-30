@@ -61,3 +61,17 @@ void is_Null()
     printf("\nThe matrix isn't null.\n\n");
   }
 }
+
+void is_Square()
+{
+  Matrix* A = malloc(sizeof(Matrix));
+  Size(A);
+
+  if (A->nb_r == A->nb_c){
+    A->is_sq = 1;
+    printf("\nThe matrix is a square one.\n\n");
+  } else {
+    A->is_sq = 0;
+    printf("\nThe matrix isn't a square one.\n\n");
+  }
+}
