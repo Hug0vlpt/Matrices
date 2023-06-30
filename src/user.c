@@ -79,15 +79,16 @@ void display_checkTypes(){
         "  - Row matrix (enter 1)\n"
         "  - Column matrix (enter 2)\n"
         "  - Null matrix (enter 3)\n"
-        "  - Square Matrix (enter 4)\n\n"
-        "Enter a number between 1 and 4: ");
+        "  - Square matrix (enter 4)\n"
+        "  - Identity matrix (enter 5)\n\n"
+        "Enter a number between 1 and 5: ");
     scanf("%d",&type);
-    if (type<1 || type>4){
+    if (type<1 || type>5){
       system("clear");
-      printf("Please enter a number between 1 and 4\n\n");
+      printf("Please enter a number between 1 and 5\n\n");
       clearBuffer();
     }
-  } while(type<1 || type>4);
+  } while(type<1 || type>5);
   system("clear");
   
   switch(type){
@@ -95,6 +96,7 @@ void display_checkTypes(){
     case 2: is_Column(); break;
     case 3: is_Null(); break;
     case 4: is_Square(); break;
+    case 5: is_Identity(); break;
   }
 } 
 
