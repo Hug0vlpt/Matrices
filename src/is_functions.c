@@ -34,6 +34,17 @@ void is_Column()
   }
 }
 
+void is_NullM(Matrix* A)
+{
+  int nb_zeros = Get_nbZeros(*A);
+
+  if (nb_zeros == (A->nb_r * A->nb_c)){
+    A->is_null = 1;
+  } else {
+    A->is_null = 0;
+  }
+}
+
 void is_Null()
 {
   Matrix* A = malloc(sizeof(Matrix));
@@ -41,14 +52,12 @@ void is_Null()
   A->arr = AllocationArr(A->nb_r, A->nb_c);
   printf("\n");
   enterValues(A);
-  
-  int nb_zeros = Get_nbZeros(*A);
 
-  if (nb_zeros == (A->nb_r * A->nb_c)){
-    A->is_null = 1;
+  is_NullM(A);
+  
+  if (A->is_null){
     printf("\nThe matrix is null.\n\n");
   } else {
-    A->is_null = 0;
     printf("\nThe matrix isn't null.\n\n");
   }
 }

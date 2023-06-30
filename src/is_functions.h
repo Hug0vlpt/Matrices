@@ -3,7 +3,10 @@
 
 void is_Row();
 void is_Column();
+
+//Null check
 void is_Null();
+void is_NullM();
 
 //Square check
 void is_Square();
