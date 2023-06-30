@@ -103,7 +103,9 @@ void is_Square()
 
 void is_IdentityM(Matrix* A)
 {
-  is_SquareM(A);
+  if (A->is_sq < 0){
+    is_SquareM(A);
+  }
   if (A->is_sq){
     int nb_zeros = Get_nbZeros(*A);
     int nb_one = 0;
@@ -131,8 +133,10 @@ void is_Identity()
   Size(A);
   A->arr = AllocationArr(A->nb_r, A->nb_c);
   printf("\n");
-  enterValues(A);
-  
+  is_SquareM(A);
+  if (A->is_sq){
+    enterValues(A);
+  }
   is_IdentityM(A);
 
   if (A->is_sq){
