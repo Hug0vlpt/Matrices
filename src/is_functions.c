@@ -4,18 +4,26 @@
 #include "user.h"
 #include "functions.h"
 
+void is_RowM(Matrix* A)
+{
+  if (A->nb_r == 1){
+    A->is_row = 1;
+  } else {
+    A->is_row = 0;
+  }
+}
+
 void is_Row()
 {
   Matrix* A = malloc(sizeof(Matrix));
   Size(A);
   printf("\n");
-
-  if (A->nb_r == 1){
+  
+  is_RowM(A);
+  if (A->is_row){
     printf("The matrix is a row one.\n\n");
-    A->is_row = 1;
   } else {
     printf("The matrix isn't a row one.\n\n");
-    A->is_row = 0;
   }
 }
 

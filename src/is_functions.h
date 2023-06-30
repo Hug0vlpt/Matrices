@@ -1,7 +1,9 @@
 #ifndef __ISFUNCTIONS_H_
 #define __ISFUNCTIONS_H_
 
+//Row check
 void is_Row();
+void is_RowM(Matrix* A);
 
 //Column check
 void is_Column();
