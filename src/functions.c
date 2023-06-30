@@ -17,6 +17,22 @@ Matrix newMatrix(int nb_r, int nb_c){
   A.nb_r = nb_r;
   A.nb_c = nb_c;
   A.arr = AllocationArr(nb_r, nb_c);
+  //-1: we don't know, 0: no, 1: yes
+  A.rk = -1;
+  A.is_row = -1;
+  A.is_column = -1;
+  A.is_null = -1;
+  A.is_id = -1;
+  A.is_elem = -1;
+  A.is_inv = -1;
+  A.is_diag = -1;
+  A.is_scal = -1;
+  A.is_up_tr = -1;
+  A.is_str_up_tr = -1;
+  A.is_low_tr = -1;
+  A.is_str_low_tr = -1;
+  A.is_sym = -1;
+  A.is_asym = -1;
 
   return A;
 }
