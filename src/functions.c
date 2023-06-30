@@ -21,6 +21,18 @@ Matrix newMatrix(int nb_r, int nb_c){
   return A;
 }
 
+int Get_nbZeros(Matrix A){
+  int nb_zeros = 0;
+  for(int i=0; i<A.nb_r; ++i){
+    for (int j=0; j<A.nb_c; ++j){
+      if (A.arr[i][j] == 0){
+        nb_zeros++;
+      }
+    }
+  }
+  return nb_zeros;
+}
+
 Matrix Get_sum(Matrix A, Matrix B){
   Matrix C = newMatrix(A.nb_r, A.nb_c);
 
