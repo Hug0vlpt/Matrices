@@ -19,18 +19,27 @@ void is_Row()
   }
 }
 
+void is_ColumnM(Matrix* A)
+{
+  if (A->nb_c == 1){
+    A->is_column = 1;
+  } else {
+    A->is_column = 0;
+  }
+}
+
 void is_Column()
 {
   Matrix* A = malloc(sizeof(Matrix));
   Size(A);
   printf("\n");
+  
+  is_ColumnM(A);
 
-  if (A->nb_c == 1){
+  if (A->is_column){
     printf("The matrix is a column one.\n\n");
-    A->is_column = 1;
   } else {
     printf("The matrix isn't a column one.\n\n");
-    A->is_column = 0;
   }
 }
 

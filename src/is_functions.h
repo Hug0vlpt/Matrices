@@ -2,7 +2,10 @@
 #define __ISFUNCTIONS_H_
 
 void is_Row();
+
+//Column check
 void is_Column();
+void is_ColumnM(Matrix* A);
 
 //Null check
 void is_Null();
