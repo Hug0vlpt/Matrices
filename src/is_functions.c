@@ -157,8 +157,8 @@ void is_DiagonalM(Matrix* A)
   }
   if (A->is_sq){
     int zero, i, j;
-    zero = j = 1;
-    i = 0;
+    zero = 1;
+    i = j = 0;
     do {
       if (i!=j){
         zero = (A->arr[i][j] == 0);
