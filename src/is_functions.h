@@ -23,6 +23,7 @@ void is_IdentityM(Matrix* A);
 
 //Diagonal check
 void is_Diagonal();
+void is_DiagonalM(Matrix* A);
 
 //Scalar check
 void is_Scalar();

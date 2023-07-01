@@ -149,3 +149,57 @@ void is_Identity()
     printf("\nThe matrix can't be an identity one because it isn't a square one.\n\n");
   }
 }
+
+void is_DiagonalM(Matrix* A)
+{
+  if (A->is_sq < 0){
+    is_Square(A);
+  }
+  if (A->is_sq){
+    int zero, i, j;
+    zero = j = 1;
+    i = 0;
+    do {
+      if (i!=j){
+        zero = (A->arr[i][j] == 0);
+      }
+      if (j == (A->nb_c-1)){
+        j = 0;
+        i++;
+      } else {
+        j++;
+      }
+    } while(zero && i<A->nb_r);
+    zero ? A->is_diag = 1 : A->is_diag == 0;
+  } else {
+    A->is_diag = 0;
+  }
+}
+
+void is_Diagonal()
+{
+  Matrix* A = malloc(sizeof(Matrix));
+  Size(A);
+  A->arr = AllocationArr(A->nb_r, A->nb_c);
+  printf("\n");
+
+  if (A->is_id){
+    A->is_diag = 1;
+  } else {
+    is_SquareM(A);
+    if (A->is_sq){
+      enterValues(A);
+    }
+    is_DiagonalM(A);
+  }
+
+  if (A->is_sq){
+    if (A->is_diag){
+      printf("\nThe matrix is a diagonal one.\n\n");
+    } else {
+      printf("\nThe matrix isn't a diagonal one.\n\n");
+    }
+  } else {
+    printf("\nThe matrix can't be a diagonal one because it isn't a square one.\n\n");
+  }
+}
