@@ -42,7 +42,6 @@ typedef struct {
   int is_elem;
   //is the matrix an invertible one? 
   int is_inv;
-  //is the matrix a diagonal one?
 } Matrix;
 
 #endif
