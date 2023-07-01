@@ -81,15 +81,16 @@ void display_checkTypes(){
         "  - Null matrix (enter 3)\n"
         "  - Square matrix (enter 4)\n"
         "  - Identity matrix (enter 5)\n"
-        "  - Diagonal matrix (enter 6)\n\n"
-        "Enter a number between 1 and 6: ");
+        "  - Diagonal matrix (enter 6)\n"
+        "  - Scalar matrix (enter 7)\n\n"
+        "Enter a number between 1 and 7: ");
     scanf("%d",&type);
-    if (type<1 || type>6){
+    if (type<1 || type>7){
       system("clear");
-      printf("Please enter a number between 1 and 6\n\n");
+      printf("Please enter a number between 1 and 7\n\n");
       clearBuffer();
     }
-  } while(type<1 || type>6);
+  } while(type<1 || type>7);
   system("clear");
   
   switch(type){
@@ -99,6 +100,7 @@ void display_checkTypes(){
     case 4: is_Square(); break;
     case 5: is_Identity(); break;
     case 6: is_Diagonal(); break;
+    case 7: is_Scalar(); break;
   }
 } 
 
@@ -106,7 +108,12 @@ void display_options()
 {
   int option;
   do{
-    printf("Which action do you want to do ?\n\n  - Perform an operation on a matrix (enter 1)\n  - Perform operations between two matrices (enter 2)\n  - Find another matrix with a matrice (enter 3)\n  - Check if a matrix is a certain type (enter 4)\n\nEnter a number between 1 and 4: ");
+    printf("Which action do you want to do ?\n\n"
+        "  - Perform an operation on a matrix (enter 1)\n"
+        "  - Perform operations between two matrices (enter 2)\n"
+        "  - Find another matrix with a matrice (enter 3)\n"
+        "  - Check if a matrix is a certain type (enter 4)\n\n"
+        "Enter a number between 1 and 4: ");
     scanf("%d",&option);
     if (option<1 || option>4){
       system("clear"); 
@@ -124,22 +131,27 @@ void display_options()
   }
 }
 
-void Size(Matrix* A)
+void Size(Matrix* A, int nb_r, int nb_c)
 {
-  do{
-    printf("The number of rows of the matrix: ");
-    scanf("%d",&A->nb_r);
-    if (A->nb_r <1){
-      printf("The number of rows must be upper or equal to 1");
-    }
-  }while (A->nb_r <1);
-  do{
-    printf("The number of columns of the matrix: ");
-    scanf("%d",&A->nb_c);
-    if (A->nb_c <1){
-      printf("The number of columns must be upper or equal to 1");
-    }
-  }while (A->nb_c <1);
+  if (!nb_r) {
+    do{
+      printf("\nThe number of rows in the matrix: ");
+      scanf("%d",&A->nb_r);
+      if (A->nb_r <1){
+        printf("The number of rows must be upper or equal to 1");
+      }
+    }while (A->nb_r <1);
+    do{
+      printf("The number of columns in the matrix: ");
+      scanf("%d",&A->nb_c);
+      if (A->nb_c <1){
+        printf("The number of columns must be upper or equal to 1");
+      }
+    }while (A->nb_c <1);
+  } else {
+    A->nb_r = nb_r;
+    A->nb_c = nb_c;
+  }
 }
 
 void enterValues(Matrix* A)
