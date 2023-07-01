@@ -12,27 +12,27 @@ int** AllocationArr(int nb_r, int nb_c){
   return arr;
 }
 
-Matrix newMatrix(int nb_r, int nb_c){
-  Matrix A;
-  A.nb_r = nb_r;
-  A.nb_c = nb_c;
-  A.arr = AllocationArr(nb_r, nb_c);
+Matrix* newMatrix(int nb_r, int nb_c){
+  Matrix* A = malloc(sizeof(Matrix));
+  Size(A,nb_r, nb_c);
+  A->arr = AllocationArr(A->nb_r, A->nb_c);
   //-1: we don't know, 0: no, 1: yes
-  A.rk = -1;
-  A.is_row = -1;
-  A.is_column = -1;
-  A.is_null = -1;
-  A.is_id = -1;
-  A.is_elem = -1;
-  A.is_inv = -1;
-  A.is_diag = -1;
-  A.is_scal = -1;
-  A.is_up_tr = -1;
-  A.is_str_up_tr = -1;
-  A.is_low_tr = -1;
-  A.is_str_low_tr = -1;
-  A.is_sym = -1;
-  A.is_asym = -1;
+  A->rk = -1;
+  A->is_row = -1;
+  A->is_column = -1;
+  A->is_sq = -1;
+  A->is_null = -1;
+  A->is_id = -1;
+  A->is_elem = -1;
+  A->is_inv = -1;
+  A->is_diag = -1;
+  A->is_scal = -1;
+  A->is_up_tr = -1;
+  A->is_str_up_tr = -1;
+  A->is_low_tr = -1;
+  A->is_str_low_tr = -1;
+  A->is_sym = -1;
+  A->is_asym = -1;
 
   return A;
 }
@@ -49,12 +49,25 @@ int Get_nbZeros(Matrix A){
   return nb_zeros;
 }
 
-Matrix Get_sum(Matrix A, Matrix B){
-  Matrix C = newMatrix(A.nb_r, A.nb_c);
+int NbsameElemDiag(Matrix A, int elem) {
+  int nb = 0;
+
+  for (int i=0; i<A.nb_r; ++i){
+    if (A.arr[i][i] == elem){
+      nb++;
+    } else {
+      break;
+    }
+  }
+  return nb;
+}
+
+Matrix* Get_sum(Matrix A, Matrix B){
+  Matrix* C = newMatrix(A.nb_r, A.nb_c);
 
   for (int i=0; i<A.nb_r; ++i){
     for (int j=0; j<A.nb_c; ++j){
-      C.arr[i][j] = A.arr[i][j] + B.arr[i][j];
+      C->arr[i][j] = A.arr[i][j] + B.arr[i][j];
     }
   }
   return C;
@@ -62,33 +75,32 @@ Matrix Get_sum(Matrix A, Matrix B){
 
 void Sum()
 {
-  Matrix A,B,C;
+  Matrix* A;
+  Matrix* B;
+  Matrix* C;
   
-  printf("The matrix A:\n\n");
-  Size(&A);
+  printf("The first matrix:\n\n");
   printf("\n");
-  A.arr = AllocationArr(A.nb_r, A.nb_c);
-  enterValues(&A);  
+  A = newMatrix(0,0);
+  enterValues(A); 
 
-  B.nb_r = A.nb_r;
-  B.nb_c = A.nb_c;
-  B.arr = AllocationArr(B.nb_r, B.nb_c);
-  printf("\nThe matrix B:\n");
-  enterValues(&B);
+  B = newMatrix(A->nb_r,A->nb_c);
+  printf("\nThe second matrix:\n");
+  enterValues(B);
   
-  C = Get_sum(A,B);
+  C = Get_sum(*A,*B);
 
   printf("\n");
-  display_Matrix(A);
+  display_Matrix(*A);
   printf("\n  +\n\n");
-  display_Matrix(B);
+  display_Matrix(*B);
   printf("\n  =\n\n");
-  display_Matrix(C);
+  display_Matrix(*C);
   printf("\n");
 }
 
-Matrix Get_product(Matrix A, Matrix B){
-  Matrix C = newMatrix(A.nb_r, B.nb_c);
+Matrix* Get_product(Matrix A, Matrix B){
+  Matrix* C = newMatrix(A.nb_r, B.nb_c);
 
   for (int i=0; i<A.nb_r; ++i){
     for (int j=0; j<B.nb_c; ++j){
@@ -96,7 +108,7 @@ Matrix Get_product(Matrix A, Matrix B){
       for (int k=0; k<A.nb_c; ++k){
         sum += A.arr[i][k] * B.arr[k][j];
       }
-      C.arr[i][j] = sum;
+      C->arr[i][j] = sum;
     }
   }
   return C;
@@ -104,35 +116,36 @@ Matrix Get_product(Matrix A, Matrix B){
 
 void Product()
 {
-  Matrix A,B,C;
+  Matrix* A;
+  Matrix* B;
+  Matrix* C;
 
-  printf("The matrix A:\n");
-  Size(&A);
-  A.arr = AllocationArr(A.nb_r, A.nb_c);
+  printf("The first matrix:\n");
+  A = newMatrix(0,0);
   printf("\n");
-  enterValues(&A);  
+  enterValues(A);  
 
-  printf("\nThe matrix B:\n");
-  B.nb_r = A.nb_c;
+  printf("\nThe second matrix:\n");
+  B = malloc(sizeof(Matrix));
   do {
-    printf("Enter the number of columns of the matrix B: ");
-    scanf("%d", &B.nb_c);
-    if (B.nb_c<1){
+    printf("Enter the number of columns in the matrix B: ");
+    scanf("%d", &B->nb_c);
+    if (B->nb_c<1){
       printf("Please enter a number upper or equal to 1.\n");
     }
-  } while(B.nb_c<1);
-  B.arr = AllocationArr(B.nb_r, B.nb_c);
+  } while(B->nb_c<1);
+  B = newMatrix(A->nb_r, B->nb_c);
   printf("\n");
-  enterValues(&B);
+  enterValues(B);
 
-  C = Get_product(A,B);
+  C = Get_product(*A,*B);
 
   printf("\n");
-  display_Matrix(A);
+  display_Matrix(*A);
   printf("\n  *\n\n");
-  display_Matrix(B);
+  display_Matrix(*B);
   printf("\n  =\n\n");
-  display_Matrix(C);
+  display_Matrix(*C);
   printf("\n");
 }
 
@@ -147,32 +160,32 @@ void Get_trace(Matrix* A)
 
 void Trace()
 {
-  Matrix A;
+  Matrix* A = malloc(sizeof(Matrix));
   do {
     printf("Enter the size of the matrix: ");
-    scanf("%d", &A.nb_r);
-    if (A.nb_r<1){
+    scanf("%d", &A->nb_r);
+    if (A->nb_r<1){
       printf("Please enter a size upper or equal to 1.\n");
     }
-  } while(A.nb_r<1);
-  A.nb_c = A.nb_r;
+  } while(A->nb_r<1);
 
-  A.arr = AllocationArr(A.nb_r, A.nb_c);
-  printf("\n");
-  enterValues(&A);
-  printf("\n");
-  display_Matrix(A);
+  A = newMatrix(A->nb_r, A->nb_r);
 
-  Get_trace(&A);
-  printf("\nThe trace of the matrix A is equal to %d.\n\n",A.trace);
+  printf("\n");
+  enterValues(A);
+  printf("\n");
+  display_Matrix(*A);
+
+  Get_trace(A);
+  printf("\nThe trace of the matrix A is equal to %d.\n\n",A->trace);
 }
 
-Matrix Get_transpose(Matrix A){
-  Matrix T = newMatrix(A.nb_c, A.nb_r); 
+Matrix* Get_transpose(Matrix A){
+  Matrix* T = newMatrix(A.nb_c, A.nb_r); 
 
   for (int i=0; i<A.nb_r; ++i){
     for (int j=0; j<A.nb_c; ++j){
-      T.arr[j][i] = A.arr[i][j];
+      T->arr[j][i] = A.arr[i][j];
     }
   }
   return T;
@@ -180,21 +193,19 @@ Matrix Get_transpose(Matrix A){
 
 void Transpose()
 {
-  Matrix A, T;
-  Size(&A);
-  A.arr = AllocationArr(A.nb_r, A.nb_c);
+  Matrix* A;
+  Matrix* T;
 
+  A = newMatrix(0,0);
   printf("\n");
-  enterValues(&A);
+  enterValues(A);
 
-  T = Get_transpose(A);
+  T = Get_transpose(*A);
   
-  printf("%d:\n",A.arr[0][1]);
-
   printf("\nThe transpose of\n");
   printf("\n");
-  display_Matrix(A);
+  display_Matrix(*A);
   printf("\nis\n\n");
-  display_Matrix(T);
+  display_Matrix(*T);
   printf("\n");
 }
