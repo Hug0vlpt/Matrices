@@ -22,10 +22,6 @@ typedef struct {
   int is_sq;
   //is the matrix an identity one?
   int is_id;
-  //is the matrix an elementary one?
-  int is_elem;
-  //is the matrix an invertible one? 
-  int is_inv;
   //is the matrix a diagonal one?
   int is_diag;
   //is the matrix a scalar one?
@@ -42,6 +38,11 @@ typedef struct {
   int is_sym;
   //is the matrix a antisymmetrical one?
   int is_asym;
+  //is the matrix an elementary one?
+  int is_elem;
+  //is the matrix an invertible one? 
+  int is_inv;
+  //is the matrix a diagonal one?
 } Matrix;
 
 #endif
