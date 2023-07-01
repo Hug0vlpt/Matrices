@@ -21,12 +21,6 @@ void is_SquareM(Matrix* A);
 void is_Identity();
 void is_IdentityM(Matrix* A);
 
-//Elementary check
-void is_Elementary();
-
-//Invertible check
-void is_Invertible();
-
 //Diagonal check
 void is_Diagonal();
 
@@ -50,5 +44,11 @@ void is_Symmetric();
 
 //Antisymmetric check
 void is_AntiSymmetric();
+
+//Elementary check
+void is_Elementary();
+
+//Invertible check
+void is_Invertible();
 
 #endif
