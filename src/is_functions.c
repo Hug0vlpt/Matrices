@@ -15,10 +15,11 @@ void is_RowM(Matrix* A)
 
 void is_Row()
 {
-  Matrix* A = malloc(sizeof(Matrix));
-  Size(A);
+  Matrix* A; 
   printf("\n");
-  
+  A = newMatrix(0,0);
+  enterValues(A);
+
   is_RowM(A);
   if (A->is_row){
     printf("The matrix is a row one.\n\n");
@@ -38,9 +39,10 @@ void is_ColumnM(Matrix* A)
 
 void is_Column()
 {
-  Matrix* A = malloc(sizeof(Matrix));
-  Size(A);
+  Matrix* A;
   printf("\n");
+  A = newMatrix(0,0);
+  enterValues(A);
   
   is_ColumnM(A);
 
@@ -64,9 +66,8 @@ void is_NullM(Matrix* A)
 
 void is_Null()
 {
-  Matrix* A = malloc(sizeof(Matrix));
-  Size(A);
-  A->arr = AllocationArr(A->nb_r, A->nb_c);
+  Matrix* A;
+  A = newMatrix(0,0);
   printf("\n");
   enterValues(A);
 
@@ -90,8 +91,12 @@ void is_SquareM(Matrix* A)
 
 void is_Square()
 {
-  Matrix* A = malloc(sizeof(Matrix));
-  Size(A);
+  Matrix* A;
+  
+  A = newMatrix(0,0);
+  printf("\n");
+  enterValues(A);
+
   is_SquareM(A);
 
   if (A->is_sq){
@@ -101,6 +106,7 @@ void is_Square()
   }
 }
 
+
 void is_IdentityM(Matrix* A)
 {
   if (A->is_sq < 0){
@@ -108,15 +114,8 @@ void is_IdentityM(Matrix* A)
   }
   if (A->is_sq){
     int nb_zeros = Get_nbZeros(*A);
-    int nb_one = 0;
+    int nb_one = NbsameElemDiag(*A,1);
 
-    for (int i=0; i<A->nb_r; ++i){
-      if (A->arr[i][i] == 1){
-        nb_one++;
-      } else {
-        break;
-      }
-    }
     if (nb_zeros == ((A->nb_r*A->nb_c)-A->nb_r) && nb_one == A->nb_r){
       A->is_id = 1;
     } else {
@@ -129,10 +128,10 @@ void is_IdentityM(Matrix* A)
 
 void is_Identity()
 {
-  Matrix* A = malloc(sizeof(Matrix));
-  Size(A);
-  A->arr = AllocationArr(A->nb_r, A->nb_c);
+  Matrix* A;
+  A = newMatrix(0,0);
   printf("\n");
+
   is_SquareM(A);
   if (A->is_sq){
     enterValues(A);
@@ -170,7 +169,12 @@ void is_DiagonalM(Matrix* A)
         j++;
       }
     } while(zero && i<A->nb_r);
-    zero ? A->is_diag = 1 : A->is_diag == 0;
+
+    if (zero) {
+      A->is_diag = 1;
+    } else {
+      A->is_diag = 0;
+    }
   } else {
     A->is_diag = 0;
   }
@@ -178,15 +182,16 @@ void is_DiagonalM(Matrix* A)
 
 void is_Diagonal()
 {
-  Matrix* A = malloc(sizeof(Matrix));
-  Size(A);
-  A->arr = AllocationArr(A->nb_r, A->nb_c);
+  Matrix* A;
+  
+  A = newMatrix(0,0);
   printf("\n");
-
-  if (A->is_id){
+  
+  if (A->is_id == 1){
     A->is_diag = 1;
   } else {
     is_SquareM(A);
+
     if (A->is_sq){
       enterValues(A);
     }
@@ -203,3 +208,52 @@ void is_Diagonal()
     printf("\nThe matrix can't be a diagonal one because it isn't a square one.\n\n");
   }
 }
+
+void is_ScalarM(Matrix* A)
+{
+  int nb_elem_diag;
+  
+  if (A->is_diag < 0) {
+    is_DiagonalM(A);
+  } 
+  
+  if (A->is_diag == 1) {
+    nb_elem_diag = NbsameElemDiag(*A, A->arr[0][0]);
+
+    if (nb_elem_diag == A->nb_c) {
+      A->is_scal = 1;
+    } else {
+      A->is_scal = 0;
+    }
+  } else {
+    A->is_scal = 0;
+  }
+}
+
+void is_Scalar()
+{
+  Matrix* A;
+  
+  A = newMatrix(0,0);
+  printf("\n");
+  is_SquareM(A);
+  if (A->is_sq){
+    enterValues(A);
+  }
+  if (A->is_id == 1 || A->is_null == 1){
+    A->is_scal = 1;
+  } else {
+    is_ScalarM(A);
+  }
+
+  if (A->is_sq){
+    if (A->is_scal){
+      printf("\nThe matrix is a scalar one.\n\n");
+    } else {
+      printf("\nThe matrix isn't a scalar one.\n\n");
+    }
+  } else {
+    printf("\nThe matrix can't be a scalar one because it isn't a square one.\n\n");
+  }
+}
+
