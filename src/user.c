@@ -152,6 +152,7 @@ void Size(Matrix* A, int nb_r, int nb_c)
     A->nb_r = nb_r;
     A->nb_c = nb_c;
   }
+  printf("\n");
 }
 
 void enterValues(Matrix* A)

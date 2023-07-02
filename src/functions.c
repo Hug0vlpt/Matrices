@@ -79,18 +79,16 @@ void Sum()
   Matrix* B;
   Matrix* C;
   
-  printf("The first matrix:\n\n");
+  printf("The first matrix:\n");
   A = newMatrix(0,0);
-  printf("\n");
   enterValues(A); 
 
   B = newMatrix(A->nb_r,A->nb_c);
-  printf("\nThe second matrix:\n");
+  printf("The second matrix:\n\n");
   enterValues(B);
   
   C = Get_sum(*A,*B);
 
-  printf("\n");
   display_Matrix(*A);
   printf("\n  +\n\n");
   display_Matrix(*B);
@@ -122,25 +120,22 @@ void Product()
 
   printf("The first matrix:\n");
   A = newMatrix(0,0);
-  printf("\n");
   enterValues(A);  
 
-  printf("\nThe second matrix:\n");
+  printf("\nThe second matrix:\n\n");
   B = malloc(sizeof(Matrix));
   do {
-    printf("Enter the number of columns in the matrix B: ");
+    printf("Enter the number of columns in the second matrix: ");
     scanf("%d", &B->nb_c);
     if (B->nb_c<1){
       printf("Please enter a number upper or equal to 1.\n");
     }
   } while(B->nb_c<1);
   B = newMatrix(A->nb_c, B->nb_c);
-  printf("\n");
   enterValues(B);
 
   C = Get_product(*A,*B);
 
-  printf("\n");
   display_Matrix(*A);
   printf("\n  *\n\n");
   display_Matrix(*B);
@@ -171,13 +166,12 @@ void Trace()
 
   A = newMatrix(A->nb_r, A->nb_r);
 
-  printf("\n");
   enterValues(A);
   printf("\n");
   display_Matrix(*A);
 
   Get_trace(A);
-  printf("\nThe trace of the matrix A is equal to %d.\n\n",A->trace);
+  printf("\nThe trace of the matrix is equal to %d.\n\n",A->trace);
 }
 
 Matrix* Get_transpose(Matrix A){
@@ -197,12 +191,11 @@ void Transpose()
   Matrix* T;
 
   A = newMatrix(0,0);
-  printf("\n");
   enterValues(A);
 
   T = Get_transpose(*A);
   
-  printf("\nThe transpose of\n");
+  printf("The transpose of\n");
   printf("\n");
   display_Matrix(*A);
   printf("\nis\n\n");
