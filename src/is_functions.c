@@ -106,7 +106,6 @@ void is_Square()
   }
 }
 
-
 void is_IdentityM(Matrix* A)
 {
   if (A->is_sq < 0){
