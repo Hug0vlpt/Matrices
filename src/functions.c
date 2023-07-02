@@ -80,8 +80,8 @@ void Sum()
   Matrix* C;
   
   printf("The first matrix:\n\n");
-  printf("\n");
   A = newMatrix(0,0);
+  printf("\n");
   enterValues(A); 
 
   B = newMatrix(A->nb_r,A->nb_c);
@@ -134,7 +134,7 @@ void Product()
       printf("Please enter a number upper or equal to 1.\n");
     }
   } while(B->nb_c<1);
-  B = newMatrix(A->nb_r, B->nb_c);
+  B = newMatrix(A->nb_c, B->nb_c);
   printf("\n");
   enterValues(B);
 
