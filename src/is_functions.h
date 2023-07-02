@@ -27,6 +27,7 @@ void is_DiagonalM(Matrix* A);
 
 //Scalar check
 void is_Scalar();
+void is_ScalarM();
 
 //Upper Triangle check
 void is_Upper_Triangle();
