@@ -14,9 +14,9 @@ void Trace();
 Matrix Get_sum(Matrix A, Matrix B);
 Matrix Get_product(Matrix A, Matrix B);
 
-int Get_nbZeros(Matrix A);
+int enoughZeros(Matrix A, int start_i, int start_j, int end_i, int end_j);
 int NbsameElemDiag(Matrix A, int elem);
-void Get_transpose(Matrix A);
+Matrix* Get_transpose(Matrix A);
 void Get_trace(Matrix* A);
 void Get_rank(Matrix A);
 

@@ -37,16 +37,30 @@ Matrix* newMatrix(int nb_r, int nb_c){
   return A;
 }
 
-int Get_nbZeros(Matrix A){
-  int nb_zeros = 0;
-  for(int i=0; i<A.nb_r; ++i){
-    for (int j=0; j<A.nb_c; ++j){
-      if (A.arr[i][j] == 0){
-        nb_zeros++;
+int enoughZeros(Matrix A, int start_i, int start_j, int end_i, int end_j){
+  int e_zeros = 1;
+  int i = start_i;
+  int j;
+  if (start_j == -2) { j = i-1; } else { j = start_j; }
+
+  int e_i = end_i;
+  int e_j;
+  if (end_j == -1) { e_j = i; } else { e_j = end_j; }
+
+  do {  
+    e_zeros = A.arr[i][j] == 0;
+    if (j == e_j-1) {
+      j = 0;
+      i++;
+      if (end_j == -1) {
+        e_j = i;
       }
+    } else {
+      j++;
     }
-  }
-  return nb_zeros;
+  } while (e_zeros && i<e_i);
+
+  return e_zeros;
 }
 
 int NbsameElemDiag(Matrix A, int elem) {
