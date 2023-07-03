@@ -145,7 +145,7 @@ void Size(Matrix* A, int nb_r, int nb_c)
       printf("The number of columns in the matrix: ");
       scanf("%d",&A->nb_c);
       if (A->nb_c <1){
-        printf("The number of columns must be upper or equal to 1");
+        printf("The number of columns must be upper or equal to 1\n");
       }
     }while (A->nb_c <1);
   } else {
