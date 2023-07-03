@@ -31,7 +31,7 @@ void is_ScalarM(Matrix* A);
 
 //Upper Triangle check
 void is_Upper_Triangle();
-void is_Upper_TriangleM();
+void is_Upper_TriangleM(Matrix* A);
 
 //Stictly Upper Triangle check
 void is_Strictly_Upper_Triangle();
