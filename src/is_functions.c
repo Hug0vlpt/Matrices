@@ -61,9 +61,9 @@ void is_Column()
 
 void is_NullM(Matrix* A)
 {
-  int nb_zeros = Get_nbZeros(*A);
+  int e_zeros = enoughZeros(*A,0,0,A->nb_r,A->nb_c);
 
-  if (nb_zeros == (A->nb_r * A->nb_c)){
+  if (e_zeros){
     A->is_null = 1;
   } else {
     A->is_null = 0;
@@ -123,14 +123,20 @@ void is_IdentityM(Matrix* A)
   if (A->is_sq < 0){
     is_SquareM(A);
   }
-  if (A->is_sq){
-    int nb_zeros = Get_nbZeros(*A);
-    int nb_one = NbsameElemDiag(*A,1);
-
-    if (nb_zeros == ((A->nb_r*A->nb_c)-A->nb_r) && nb_one == A->nb_r){
-      A->is_id = 1;
+  if (A->is_sq) {
+    Matrix* T = Get_transpose(*A);
+    if (A->nb_r == 1) {
+      if (A->arr[0][0] == 1) { A->is_id = 1; } else { A->is_id = 0; }
     } else {
-      A->is_id = 0;
+      int e_zeros_lt = enoughZeros(*T,1,-2,A->nb_r,-1);
+      int e_zeros_ut = enoughZeros(*A,1,-2,A->nb_r,-1);
+      int nb_one = NbsameElemDiag(*A,1);
+
+      if (e_zeros_lt && e_zeros_ut && nb_one == A->nb_r) {
+        A->is_id = 1;
+      } else {
+        A->is_id = 0;
+      }
     }
   } else {
     A->is_id = 0;
@@ -156,8 +162,7 @@ void is_Identity()
     } else {
       printf("\nThe matrix\n\n");
       display_Matrix(*A);
-      printf("\nisn't an identity one.\n\n");
-      
+      printf("\nisn't an identity one.\n\n"); 
     }
   } else {
       printf("The matrix can't be an identity one because it isn't a square one.\n\n");
@@ -277,4 +282,3 @@ void is_Scalar()
       printf("The matrix can't be a scalar one because it isn't a square one.\n\n");
   }
 }
-
