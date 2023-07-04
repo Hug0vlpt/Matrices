@@ -84,15 +84,16 @@ void display_checkTypes(){
         "  - Diagonal matrix (enter 6)\n"
         "  - Scalar matrix (enter 7)\n"
         "  - Triangular matrix (enter 8)\n"
-        "  - Symmetric matrix (enter 9)\n\n"
-        "Enter a number between 1 and 9: ");
+        "  - Symmetric matrix (enter 9)\n"
+        "  - Antisymmetric matrix (enter 10)\n\n"
+        "Enter a number between 1 and 10: ");
     scanf("%d",&type);
-    if (type<1 || type>9){
+    if (type<1 || type>10){
       system("clear");
-      printf("Please enter a number between 1 and 9\n\n");
+      printf("Please enter a number between 1 and 10\n\n");
       clearBuffer();
     }
-  } while(type<1 || type>9);
+  } while(type<1 || type>10);
   system("clear");
   
   switch(type){
@@ -105,6 +106,7 @@ void display_checkTypes(){
     case 7: is_Scalar(); break;
     case 8: is_Triangular(); break;
     case 9: is_Symmetric(); break;
+    case 10: is_AntiSymmetric(); break;
   }
 } 
 
