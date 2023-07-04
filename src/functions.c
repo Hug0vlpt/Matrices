@@ -45,7 +45,7 @@ int enoughZeros(Matrix A, int start_i, int start_j, int end_i, int end_j){
 
   int e_i = end_i;
   int e_j;
-  if (end_j == -1) { e_j = i; } else { e_j = end_j; }
+  if (end_j == -1) { e_j = i; } else if (end_j == -2) { e_j = i+1; } else { e_j = end_j; }
 
   do {  
     e_zeros = A.arr[i][j] == 0;
@@ -54,6 +54,8 @@ int enoughZeros(Matrix A, int start_i, int start_j, int end_i, int end_j){
       i++;
       if (end_j == -1) {
         e_j = i;
+      } else if (end_j == -2) {
+        e_j = i+1;
       }
     } else {
       j++;
