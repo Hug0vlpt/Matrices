@@ -38,8 +38,6 @@ typedef struct {
   int is_sym;
   //is the matrix a antisymmetrical one?
   int is_asym;
-  //is the matrix an elementary one?
-  int is_elem;
   //is the matrix an invertible one? 
   int is_inv;
 } Matrix;

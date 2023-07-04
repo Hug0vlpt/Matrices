@@ -23,8 +23,6 @@ Matrix* newMatrix(int nb_r, int nb_c){
   A->is_sq = -1;
   A->is_null = -1;
   A->is_id = -1;
-  A->is_elem = -1;
-  A->is_inv = -1;
   A->is_diag = -1;
   A->is_scal = -1;
   A->is_up_tr = -1;
@@ -33,6 +31,7 @@ Matrix* newMatrix(int nb_r, int nb_c){
   A->is_str_low_tr = -1;
   A->is_sym = -1;
   A->is_asym = -1;
+  A->is_inv = -1;
 
   return A;
 }
