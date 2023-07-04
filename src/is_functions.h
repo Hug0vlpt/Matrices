@@ -35,12 +35,9 @@ void is_TriangularM(Matrix* A);
 
 //Symmetric check
 void is_Symmetric();
-
+void is_SymmetricM(Matrix* A)
 //Antisymmetric check
 void is_AntiSymmetric();
-
-//Elementary check
-void is_Elementary();
 
 //Invertible check
 void is_Invertible();

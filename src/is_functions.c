@@ -21,11 +21,11 @@ void is_Row()
 
   is_RowM(A);
   if (A->is_row){
-    printf("\nThe matrix\n\n");
+    printf("The matrix\n\n");
     display_Matrix(*A);
     printf("\nis a row one.\n\n");
   } else {
-    printf("\nThe matrixn\n");
+    printf("The matrixn\n");
     display_Matrix(*A);
     printf("isn't a row one.\n\n");
   }
@@ -49,11 +49,11 @@ void is_Column()
   is_ColumnM(A);
 
   if (A->is_column){
-    printf("\nThe matrix\n\n");
+    printf("The matrix\n\n");
     display_Matrix(*A);
     printf("\nis a column one.\n\n");
   } else {
-    printf("\nThe matrix\n\n");
+    printf("The matrix\n\n");
     display_Matrix(*A);
     printf("\nisn't a column one.\n\n");
   }
@@ -79,11 +79,11 @@ void is_Null()
   is_NullM(A);
   
   if (A->is_null){
-    printf("\nThe matrix\n\n");
+    printf("The matrix\n\n");
     display_Matrix(*A);
     printf("\nis null.\n\n");
   } else {
-    printf("\nThe matrix\n\n");
+    printf("The matrix\n\n");
     display_Matrix(*A);
     printf("\nisn't null.\n\n");
     }
@@ -108,11 +108,11 @@ void is_Square()
   is_SquareM(A);
 
   if (A->is_sq){
-    printf("\nThe matrix\n\n");
+    printf("The matrix\n\n");
     display_Matrix(*A);
     printf("\nis a square one.\n\n");
   } else {
-    printf("\nThe matrix\n\n");
+    printf("The matrix\n\n");
     display_Matrix(*A);
     printf("\nisn't a square one.\n\n");
   }
@@ -156,11 +156,11 @@ void is_Identity()
 
   if (A->is_sq){
     if (A->is_id){
-      printf("\nThe matrix\n\n");
+      printf("The matrix\n\n");
       display_Matrix(*A);
       printf("\nis an identity one.\n\n");      
     } else {
-      printf("\nThe matrix\n\n");
+      printf("The matrix\n\n");
       display_Matrix(*A);
       printf("\nisn't an identity one.\n\n"); 
     }
@@ -219,11 +219,11 @@ void is_Diagonal()
 
   if (A->is_sq){
     if (A->is_diag){
-      printf("\nThe matrix\n\n");
+      printf("The matrix\n\n");
       display_Matrix(*A);
       printf("\nis a diagonal one.\n\n");      
     } else {
-      printf("\nThe matrix\n\n");
+      printf("The matrix\n\n");
       display_Matrix(*A);
       printf("\nisn't a diagonal one.\n\n");      
     }
@@ -270,11 +270,11 @@ void is_Scalar()
 
   if (A->is_sq){
     if (A->is_scal){
-      printf("\nThe matrix\n\n");
+      printf("The matrix\n\n");
       display_Matrix(*A);
       printf("\nis a scalar one.\n\n");      
     } else {
-      printf("\nThe matrix\n\n");
+      printf("The matrix\n\n");
       display_Matrix(*A);
       printf("\nisn't a scalar one.\n\n");      
     }
@@ -372,6 +372,46 @@ void is_Triangular()
     }
   } else {
       printf("The matrix can't be an upper triangular one because it isn't a square one.\n\n");
+  }
+}
+
+void is_SymmetricM(Matrix* A) {
+  int equal;
+  if (A->is_sq < 0){
+    is_SquareM(A);
+  }
+  if (A->is_sq) {
+    Matrix* T = Get_transpose(*A);
+    equal = are_Equal(*A,*T);
+    if (equal == 1) { A->is_sym = 1; } else { A->is_sym = 0; }
+  } else {
+    A->is_sym = 0;
+  }
+}
+
+void is_Symmetric() 
+{
+  Matrix* A;
+  A = newMatrix(0,0);
+
+  is_SquareM(A);
+  if (A->is_sq){
+    enterValues(A);
+  }
+  is_SymmetricM(A);
+
+  if (A->is_sq){
+    if (A->is_sym){
+      printf("The matrix\n\n");
+      display_Matrix(*A);
+      printf("\nis a symmetric one.\n\n");      
+    } else {
+      printf("The matrix\n\n");
+      display_Matrix(*A);
+      printf("\nisn't a symmetric one.\n\n"); 
+    }
+  } else {
+      printf("The matrix can't be a symmetric one because it isn't a square one.\n\n");
   }
 }
 
