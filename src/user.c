@@ -82,15 +82,16 @@ void display_checkTypes(){
         "  - Square matrix (enter 4)\n"
         "  - Identity matrix (enter 5)\n"
         "  - Diagonal matrix (enter 6)\n"
-        "  - Scalar matrix (enter 7)\n\n"
-        "Enter a number between 1 and 7: ");
+        "  - Scalar matrix (enter 7)\n"
+        "  - Triangular matrix (enter 8)\n\n"
+        "Enter a number between 1 and 8: ");
     scanf("%d",&type);
-    if (type<1 || type>7){
+    if (type<1 || type>8){
       system("clear");
-      printf("Please enter a number between 1 and 7\n\n");
+      printf("Please enter a number between 1 and 8\n\n");
       clearBuffer();
     }
-  } while(type<1 || type>7);
+  } while(type<1 || type>8);
   system("clear");
   
   switch(type){
@@ -101,6 +102,7 @@ void display_checkTypes(){
     case 5: is_Identity(); break;
     case 6: is_Diagonal(); break;
     case 7: is_Scalar(); break;
+    case 8: is_Triangular(); break;
   }
 } 
 

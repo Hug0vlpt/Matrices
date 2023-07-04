@@ -282,3 +282,98 @@ void is_Scalar()
       printf("The matrix can't be a scalar one because it isn't a square one.\n\n");
   }
 }
+
+void is_TriangularM(Matrix* A)
+{
+  if (A->is_sq < 0){
+    is_SquareM(A);
+  }
+  if (A->is_sq) {
+    Matrix* T = Get_transpose(*A);
+
+    if (A->nb_r == 1) {
+      if (A->arr[0][0] == 0) { A->is_str_up_tr = 1; A->is_str_low_tr = 1;} else { A->is_up_tr = 1; A->is_low_tr = 1; }
+    } else {
+      int e_zeros_str_ut = enoughZeros(*A,0,0,A->nb_r,-2);
+      int e_zeros_str_l = enoughZeros(*T,0,0,A->nb_r,-2);
+      int e_zeros_ut = enoughZeros(*A,1,-2,A->nb_r,-1);
+      int e_zeros_lt = enoughZeros(*T,1,-2,A->nb_r,-1);
+      
+      if (e_zeros_str_ut) {
+        A->is_str_up_tr = 1;
+      } else {
+        A->is_up_tr = 0;
+      }
+      if (e_zeros_str_l) {
+        A->is_str_low_tr = 1;
+      } else {
+        A->is_str_low_tr = 0;
+      }
+      if (e_zeros_ut) {
+        A->is_up_tr = 1;
+      } else {
+        A->is_up_tr = 0;
+      }
+      if (e_zeros_lt) {
+        A->is_low_tr = 1;
+      } else {
+        A->is_low_tr = 0;
+      }
+    }
+  } 
+}
+
+void is_Triangular()
+{
+  int str_up, str_l, up, low;
+  Matrix* A;
+  A = newMatrix(0,0);
+
+  is_SquareM(A);
+  if (A->is_sq){
+    enterValues(A);
+  }
+  is_TriangularM(A);
+
+  str_up = A->is_str_up_tr == 1;
+  str_l = A->is_str_low_tr == 1;
+  up = A->is_up_tr == 1;
+  low = A->is_low_tr == 1;
+
+  if (A->is_sq){
+    if (str_up && str_l) {
+      printf("The matrix\n\n");
+      display_Matrix(*A);
+      printf("\nis null (both strictly upper triangular and strictly lower triangular).\n\n");      
+    } else if (str_up) {
+      printf("The matrix\n\n");
+      display_Matrix(*A);
+      printf("\nis a strictly upper triangular one.\n\n"); 
+    } else if (str_l) {
+      printf("The matrix\n\n");
+      display_Matrix(*A);
+      printf("\nis a strictly lower triangular one.\n\n");
+    } else if (up && low) {
+      printf("The matrix\n\n");
+      display_Matrix(*A);
+      printf("\nis a diagonal one (both upper triangular and lower triangular).\n\n"); 
+    } else if (up) {
+      printf("The matrix\n\n");
+      display_Matrix(*A);
+      printf("\nis an upper triangular one.\n\n"); 
+    } else if (low) {
+      printf("The matrix\n\n");
+      display_Matrix(*A);
+      printf("\nis a lower triangular one.\n\n"); 
+    } else {
+      printf("The matrix\n\n");
+      display_Matrix(*A);
+      printf("\nisn't triangular.\n\n"); 
+    }
+  } else {
+      printf("The matrix can't be an upper triangular one because it isn't a square one.\n\n");
+  }
+}
+
+
+

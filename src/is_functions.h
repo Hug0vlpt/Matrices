@@ -29,18 +29,9 @@ void is_DiagonalM(Matrix* A);
 void is_Scalar();
 void is_ScalarM(Matrix* A);
 
-//Upper Triangle check
-void is_Upper_Triangle();
-void is_Upper_TriangleM(Matrix* A);
-
-//Stictly Upper Triangle check
-void is_Strictly_Upper_Triangle();
-
-//Lower triangle check
-void is_Lower_Triangle();
-
-//Strictly Lower Triangle check
-void is_Strictly_Lower_Triangle();
+//Triangular check
+void is_Triangular();
+void is_TriangularM(Matrix* A);
 
 //Symmetric check
 void is_Symmetric();
