@@ -14,13 +14,13 @@ void display_operations1m(){
  int operation;
   do{
     printf("Which operation do you want to perform ?\n\n"
-        " - Trace (enter 1)\n\n"
-        "Enter a number between 1 and 2: ");
+        "\t- Trace    (enter 1)\n\n"
+        "Enter a number between 1 and 1: ");
     scanf("%d",&operation);
-    if (operation<1 || operation>2){
-      printf("Please enter a number between 1 and 2\n");
+    if (operation<1 || operation>1){
+      printf("Please enter a number between 1 and 1\n");
     }
-  } while(operation<1 || operation>2);
+  } while(operation<1 || operation>1);
   system("clear");
   
   switch(operation){
@@ -33,8 +33,8 @@ void display_operations2m(){
  int operation;
   do{
     printf("Which operation do you want to perform ?\n\n"
-        "  - Sum (enter 1)\n"
-        "  - Product (enter 2)\n\n"
+        "\t- Sum        (enter 1)\n"
+        "\t- Product    (enter 2)\n\n"
         "Enter a number between 1 and 2: ");
     scanf("%d",&operation);
     if (operation<1 || operation>2){
@@ -55,12 +55,12 @@ void display_findMatrix(){
  int option;
   do{
     printf("Which matrix do you want to find based on a matrix?\n\n"
-        "  - Transpose (enter 1)\n\n"
-        "Enter a number between 1 and 2: ");
+        "\t- Transpose    (enter 1)\n\n"
+        "Enter a number between 1 and 1: ");
     scanf("%d",&option);
-    if (option<1 || option>2){
+    if (option<1 || option>1){
       system("clear");
-      printf("Please enter a number between 1 and 2\n\n");
+      printf("Please enter a number between 1 and 1\n\n");
       clearBuffer();
     }
   } while(option<1 || option>2);
@@ -76,16 +76,16 @@ void display_checkTypes(){
  int type;
   do{
     printf("Which type do you want to test with a matrix ?\n\n"
-        "  - Row matrix (enter 1)\n"
-        "  - Column matrix (enter 2)\n"
-        "  - Null matrix (enter 3)\n"
-        "  - Square matrix (enter 4)\n"
-        "  - Identity matrix (enter 5)\n"
-        "  - Diagonal matrix (enter 6)\n"
-        "  - Scalar matrix (enter 7)\n"
-        "  - Triangular matrix (enter 8)\n"
-        "  - Symmetric matrix (enter 9)\n"
-        "  - Antisymmetric matrix (enter 10)\n\n"
+        "\t- Row matrix             (enter 1)\n"
+        "\t- Column matrix          (enter 2)\n"
+        "\t- Null matrix            (enter 3)\n"
+        "\t- Square matrix          (enter 4)\n"
+        "\t- Identity matrix        (enter 5)\n"
+        "\t- Diagonal matrix        (enter 6)\n"
+        "\t- Scalar matrix          (enter 7)\n"
+        "\t- Triangular matrix      (enter 8)\n"
+        "\t- Symmetric matrix       (enter 9)\n"
+        "\t- Antisymmetric matrix   (enter 10)\n\n"
         "Enter a number between 1 and 10: ");
     scanf("%d",&type);
     if (type<1 || type>10){
