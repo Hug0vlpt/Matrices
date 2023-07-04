@@ -89,6 +89,22 @@ Matrix* Get_sum(Matrix A, Matrix B){
   return C;
 }
 
+int are_Equal(Matrix A, Matrix B)
+{
+  if (A.nb_r == B.nb_r && A.nb_c == B.nb_c) {
+    for (int i=0; i<A.nb_r; ++i) {
+      for (int j=0; j<A.nb_r; ++j) {
+        if (A.arr[i][j] != B.arr[i][j]) {
+          return 0;
+        }
+      }
+    }
+  } else {
+    return -1;
+  }
+  return 1;
+}
+
 void Sum()
 {
   Matrix* A;
