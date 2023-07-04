@@ -11,8 +11,9 @@ void Transpose();
 void Invert(Matrix A);
 void Trace();
 
-Matrix Get_sum(Matrix A, Matrix B);
-Matrix Get_product(Matrix A, Matrix B);
+Matrix* Get_sum(Matrix A, Matrix B);
+Matrix* Get_product(Matrix A, Matrix B);
+Matrix* Get_productScalar(Matrix A, int sc);
 
 int enoughZeros(Matrix A, int start_i, int start_j, int end_i, int end_j);
 int NbsameElemDiag(Matrix A, int elem);

@@ -176,6 +176,16 @@ void Product()
   printf("\n");
 }
 
+Matrix* Get_productScalar(Matrix A, int sc)
+{
+  Matrix* B = newMatrix(A.nb_r,A.nb_c);
+  for (int i=0; i<A.nb_r; ++i) {
+    for (int j=0; j<A.nb_c; ++j) {
+      B->arr[i][j] = A.arr[i][j] * sc;
+    }
+  }
+  return B;
+}
 void Get_trace(Matrix* A)
 {
   int trace = 0;
