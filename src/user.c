@@ -115,10 +115,10 @@ void display_options()
   int option;
   do{
     printf("Which action do you want to do ?\n\n"
-        "  - Perform an operation on a matrix (enter 1)\n"
-        "  - Perform operations between two matrices (enter 2)\n"
-        "  - Find another matrix with a matrice (enter 3)\n"
-        "  - Check if a matrix is a certain type (enter 4)\n\n"
+        "\t- Perform an operation on a matrix           (enter 1)\n"
+        "\t- Perform operations between two matrices    (enter 2)\n"
+        "\t- Find another matrix with a matrice         (enter 3)\n"
+        "\t- Check if a matrix is a certain type        (enter 4)\n\n"
         "Enter a number between 1 and 4: ");
     scanf("%d",&option);
     if (option<1 || option>4){
