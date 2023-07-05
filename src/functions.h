@@ -19,6 +19,8 @@ Matrix* Get_transpose(Matrix A);
 int enoughZeros(Matrix A, int start_i, int start_j, int end_i, int end_j);
 int NbsameElemDiag(Matrix A, int elem);
 int are_Equal(Matrix A, Matrix B);
+void assignArr(Matrix* B, Matrix A);
+void assignMatrix(Matrix* B, Matrix A);
 
 void Get_trace(Matrix* A);
 void Get_rank(Matrix A);

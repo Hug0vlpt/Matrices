@@ -268,3 +268,34 @@ void swapLines(Matrix* A, int nb_r1, int nb_r2)
   }
 }
 
+void assignArr(Matrix* B, Matrix A)
+{
+  for (int i=0; i<A.nb_r; ++i) {
+    for (int j=0; j<A.nb_c; ++j) {
+      B->arr[i][j] = A.arr[i][j];
+    }
+  }
+}
+
+void assignMatrix(Matrix* B, Matrix A)
+{
+  Size(B, A.nb_r, A.nb_c);
+  B->arr = AllocationArr(B->nb_r, B->nb_c);
+  assignArr(B,A);
+
+  B->rk = A.rk;
+  B->is_row = A.is_row;
+  B->is_column = A.is_column;
+  B->is_sq = A.is_sq;
+  B->is_null = A.is_null;
+  B->is_id = A.is_id;
+  B->is_diag = A.is_diag;
+  B->is_scal = A.is_scal;
+  B->is_up_tr = A.is_up_tr;
+  B->is_str_up_tr = A.is_str_up_tr;
+  B->is_low_tr = A.is_low_tr;
+  B->is_str_low_tr = A.is_str_low_tr;
+  B->is_sym = A.is_sym;
+  B->is_asym = A.is_asym; 
+  B->is_inv = A.is_inv; 
+}
