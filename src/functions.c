@@ -243,3 +243,28 @@ void Transpose()
   display_Matrix(*T);
   printf("\n");
 }
+
+void productLine(Matrix* A, int nb_row, int scal)
+{
+  for (int j=0; j<A->nb_c; ++j) {
+    A->arr[nb_row][j] *= scal;
+  }
+}
+
+void sumLines(Matrix* A, int nb_r1, int nb_r2, int scal)
+{
+  for (int j=0; j<A->nb_c; ++j) {
+    A->arr[nb_r1][j] += A->arr[nb_r2][j] * scal;
+  }
+}
+
+void swapLines(Matrix* A, int nb_r1, int nb_r2)
+{
+  int temp;
+  for (int j=0; j<A->nb_c; ++j) {
+    temp = A->arr[nb_r1][j];
+    A->arr[nb_r1][j] = A->arr[nb_r2][j];
+    A->arr[nb_r2][j] = temp;
+  }
+}
+

@@ -23,4 +23,9 @@ int are_Equal(Matrix A, Matrix B);
 void Get_trace(Matrix* A);
 void Get_rank(Matrix A);
 
+//elementary row operations
+void productLine(Matrix* A, int nb_row, int scal);
+void sumLines(Matrix* A, int nb_r1, int nb_r2, int scal);
+void swapLines(Matrix* A, int nb_r1, int nb_r2);
+
 #endif 
