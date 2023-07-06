@@ -12,7 +12,7 @@ int main (int argc, char *argv[])
     printf("Do you want to do something else ? (y/n): ");
     clearBuffer();
     fgets(token, 2, stdin);
-    system("clear");
+    printf("\e[1;1H\e[2J");
   } while(!strcmp(token,"y"));
 
   return 0;
