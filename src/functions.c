@@ -299,18 +299,3 @@ void assignMatrix(Matrix* B, Matrix A)
   B->is_asym = A.is_asym; 
   B->is_inv = A.is_inv; 
 }
-
-int are_independentRow(Matrix A, int nb_r1, int nb_r2)
-{
-  if (A.arr[nb_r1][0] < A.arr[nb_r2][0]) { 
-    int temp = nb_r1;
-    nb_r1 = nb_r2;
-    nb_r2 = temp;
-  }
-  for (int j=0; j<A.nb_c; ++j) {
-    if (A.arr[nb_r2][j] == 0 || (A.arr[nb_r1][j] % A.arr[nb_r2][j]) != 0) {
-      return 0;
-    }
-  }
-  return 1;
-}
