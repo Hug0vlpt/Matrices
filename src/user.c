@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "user.h"
 #include "struct.h"
 #include "functions.h"
@@ -43,7 +44,8 @@ void display_operations2m(){
       clearBuffer();
     }
   } while(operation<1 || operation>2);
-  system("clear");
+  printf("\e[1;1H\e[2J");
+
   
   switch(operation){
     case 1: Sum(); break;    
@@ -64,7 +66,7 @@ void display_findMatrix(){
       clearBuffer();
     }
   } while(option<1 || option>1);
-  system("clear");
+  printf("\e[1;1H\e[2J");
   
   switch(option){
     case 1: Transpose(); break;    
@@ -163,10 +165,39 @@ void Size(Matrix* A, int nb_r, int nb_c)
 
 void enterValues(Matrix* A)
 {
+  char *token = malloc(20*sizeof(char));
+  //i_t and j_t allows us to know in which box the 'r' was written
+  int i_t = -1; 
+  int j_t = -1;
+
   for (int i=0; i<A->nb_r; ++i){
     for (int j=0; j<A->nb_c; ++j){
-      printf("Enter the value of the row n°%d and the column n°%d: ",i+1,j+1);
-      scanf("%d",&A->arr[i][j]);
+      printf("Enter the value of the row n°%d and the column n°%d (<nb>/r): ",i+1,j+1);
+      //erase the digit to be replaced
+      if (!strcmp(token,"r")) { printf("                  \b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"); }
+      //erase the 'r' 
+      if (i == i_t && j == j_t) { printf(" \b"); }
+
+      clearBuffer();
+      scanf( "%20[^\n]", token);
+
+      if (!strcmp(token,"r")) {
+        i_t = i;
+        j_t = j;
+        if (i==0 && j==0) { 
+          printf("We are on the first box of the matrix.               \n");
+          j -= 1;
+        } else if (j==0) {
+          j = A->nb_c-2; 
+          i -= 1;
+        } else {
+          j -= 2;
+        }
+        //places the cursor on the digit to be replaced
+        printf("\e[2A");
+      } else {
+        A->arr[i][j] = atoi(token);
+      }
     }
   }
 }
