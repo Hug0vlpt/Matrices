@@ -63,7 +63,7 @@ void display_findMatrix(){
       printf("Please enter a number between 1 and 1\n\n");
       clearBuffer();
     }
-  } while(option<1 || option>2);
+  } while(option<1 || option>1);
   system("clear");
   
   switch(option){
