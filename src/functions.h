@@ -23,6 +23,7 @@ void Invert(Matrix A);
 void Trace();
 void Get_trace(Matrix* A);
 void Get_rank(Matrix A);
+int are_independentRow(Matrix A, int nb_r1, int nb_r2);
 
 //useful in functions
 Matrix* Get_productScalar(Matrix A, int sc);
