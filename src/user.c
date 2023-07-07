@@ -25,7 +25,7 @@ void display_operations1m(){
   system("clear");
   
   switch(operation){
-    case 1: Trace(); break;    
+    case 1: do { Trace(); } while(restartOption("Trace calculation")==1); break;    
     //case 2: Rank(); break;
   }
 } 
@@ -45,11 +45,10 @@ void display_operations2m(){
     }
   } while(operation<1 || operation>2);
   printf("\e[1;1H\e[2J");
-
   
   switch(operation){
-    case 1: Sum(); break;    
-    case 2: Product(); break;
+    case 1: do { Sum(); } while(restartOption("Sum operations")==1); break;    
+    case 2: do { Product(); } while(restartOption("Product operations")==1); break;
   }
 } 
 
@@ -69,7 +68,7 @@ void display_findMatrix(){
   printf("\e[1;1H\e[2J");
   
   switch(option){
-    case 1: Transpose(); break;    
+    case 1: do { Transpose(); } while(restartOption("Transpose matrices")==1); break;    
     //case 2: Invert(); break;
   }
 } 
@@ -99,16 +98,16 @@ void display_checkTypes(){
   system("clear");
   
   switch(type){
-    case 1: is_Row(); break;    
-    case 2: is_Column(); break;
-    case 3: is_Null(); break;
-    case 4: is_Square(); break;
-    case 5: is_Identity(); break;
-    case 6: is_Diagonal(); break;
-    case 7: is_Scalar(); break;
-    case 8: is_Triangular(); break;
-    case 9: is_Symmetric(); break;
-    case 10: is_AntiSymmetric(); break;
+    case 1: do { is_Row(); } while(restartOption("Row matrices")==1); break;    
+    case 2: do { is_Column(); } while(restartOption("Column matrices")==1); break;
+    case 3: do { is_Null(); } while(restartOption("Null matrices")==1); break;
+    case 4: do { is_Square(); } while(restartOption("Square matrices")==1); break;
+    case 5: do { is_Identity(); } while(restartOption("Identity matrices")==1); break;
+    case 6: do { is_Diagonal(); } while(restartOption("Diagonal matrices")==1); break;
+    case 7: do { is_Scalar(); } while(restartOption("Scalar matrices")==1); break;
+    case 8: do { is_Triangular(); } while(restartOption("Triangular matrices")==1); break;
+    case 9: do { is_Symmetric(); } while(restartOption("Symmetric matrices")==1); break;
+    case 10:do { is_AntiSymmetric(); } while(restartOption("Antisymmetric matrices")==1); break;
   }
 } 
 
@@ -211,4 +210,17 @@ void display_Matrix(Matrix A)
     }
     printf("\n");
   }
+}
+
+int restartOption(char name_opt[]) {
+  int restart = 0;
+  char token[2];
+
+  printf("Do you want to continue with the %s ? (y/n): ", name_opt);
+  clearBuffer();
+  fgets(token, 2, stdin);
+  restart = !strcmp(token,"y");
+  printf("\e[1;1H\e[2J");
+
+  return restart;
 }

@@ -15,4 +15,6 @@ void clearBuffer();
 void display_Matrix(Matrix A);
 void display_Info_Matrix(Matrix A);
 
+int restartOption(char name_opt[]);
+
 #endif
