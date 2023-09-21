@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "struct.h"
+#include "functions.h"
+#include "is_functions.h"
 #include "user.h"
+#include "save.h"
 
 int** AllocationArr(int nb_r, int nb_c){
   int** arr = malloc(nb_r *sizeof(int*));
@@ -17,7 +21,9 @@ Matrix* newMatrix(int nb_r, int nb_c){
   Size(A,nb_r, nb_c);
   A->arr = AllocationArr(A->nb_r, A->nb_c);
   //-1: we don't know, 0: no, 1: yes
+  A->trace = -1;
   A->rk = -1;
+  A->is_saved = 0;
   A->is_row = -1;
   A->is_column = -1;
   A->is_sq = -1;
@@ -104,20 +110,19 @@ int are_Equal(Matrix A, Matrix B)
   return 1;
 }
 
-void Sum()
+void Sum(ArrM* Am)
 {
   Matrix* A;
   Matrix* B;
   Matrix* C;
+  int size_check1[3] = {0,0,0};
   
-  printf("The first matrix:\n");
-  A = newMatrix(0,0);
-  enterValues(A); 
+  A = chooseNSmat(*Am, 0, size_check1, "For the first matrix, d");
 
-  B = newMatrix(A->nb_r,A->nb_c);
-  printf("The second matrix:\n\n");
-  enterValues(B);
-  
+  printf("\e[1;1H\e[2J");
+  int size_check2[3] = {-1, A->nb_r, A->nb_c};
+  B = chooseNSmat(*Am, 0, size_check2, "For the second matrix, d");
+
   C = Get_sum(*A,*B);
 
   display_Matrix(*A);
@@ -126,6 +131,10 @@ void Sum()
   printf("\n  =\n\n");
   display_Matrix(*C);
   printf("\n");
+
+  if (!A->is_saved) { inputSaveM(Am,A,"first matrix"); }
+  if (!B->is_saved) { inputSaveM(Am,B,"second matrix"); }
+  inputSaveM(Am,C,"sum of the matrices");
 }
 
 Matrix* Get_product(Matrix A, Matrix B){
@@ -143,27 +152,18 @@ Matrix* Get_product(Matrix A, Matrix B){
   return C;
 }
 
-void Product()
+void Product(ArrM* Am)
 {
   Matrix* A;
   Matrix* B;
   Matrix* C;
+  int size_check1[3] = {0,0,0};
+  
+  A = chooseNSmat(*Am, 0, size_check1, "For the first matrix, d");
 
-  printf("The first matrix:\n");
-  A = newMatrix(0,0);
-  enterValues(A);  
-
-  printf("\nThe second matrix:\n\n");
-  B = malloc(sizeof(Matrix));
-  do {
-    printf("Enter the number of columns in the second matrix: ");
-    scanf("%d", &B->nb_c);
-    if (B->nb_c<1){
-      printf("Please enter a number upper or equal to 1.\n");
-    }
-  } while(B->nb_c<1);
-  B = newMatrix(A->nb_c, B->nb_c);
-  enterValues(B);
+  printf("\e[1;1H\e[2J");
+  int size_check2[3] = {-2, A->nb_c, A->nb_r};
+  B = chooseNSmat(*Am, 0, size_check2, "For the second matrix, d");
 
   C = Get_product(*A,*B);
 
@@ -173,6 +173,10 @@ void Product()
   printf("\n  =\n\n");
   display_Matrix(*C);
   printf("\n");
+
+  if (!A->is_saved) { inputSaveM(Am,A,"first matrix"); }
+  if (!B->is_saved) { inputSaveM(Am,B,"second matrix"); }
+  inputSaveM(Am,C,"product of the matrices");
 }
 
 Matrix* Get_productScalar(Matrix A, int sc)
@@ -185,6 +189,7 @@ Matrix* Get_productScalar(Matrix A, int sc)
   }
   return B;
 }
+
 void Get_trace(Matrix* A)
 {
   int trace = 0;
@@ -194,25 +199,83 @@ void Get_trace(Matrix* A)
   A->trace = trace;
 }
 
-void Trace()
+void Trace(ArrM* Am)
 {
   Matrix* A = malloc(sizeof(Matrix));
-  do {
-    printf("Enter the size of the matrix: ");
-    scanf("%d", &A->nb_r);
-    if (A->nb_r<1){
-      printf("Please enter a size upper or equal to 1.\n");
+  int size_check[3] = {0,0,0};
+  
+  A = chooseNSmat(*Am, 1, size_check, "D");
+  
+  if (A->is_sq) {
+    Get_trace(A);
+    printf("\nThe trace of the matrix\n\n");
+    display_Matrix(*A);  
+    printf("\nis equal to %d.\n\n",A->trace);
+
+    if (!A->is_saved) { inputSaveM(Am,A,"matrix"); }
+  } else {
+    printf("The trace can't be calculated because the matrix isn't a square one.\n\n");
+  }
+}
+
+void perfProdR(Matrix* A, int nb_row, int scal)
+{
+  for (int j=0; j<A->nb_c; ++j) {
+    A->arr[nb_row][j] *= scal;
+  }
+}
+
+void ProductRow(ArrM* Am) 
+{
+  Matrix* A = malloc(sizeof(Matrix));
+  char restartSame[2];
+  int size_check[3] = {0,0,0};
+  int nb_row, scal;
+
+  A = chooseNSmat(*Am, 1, size_check, "D");
+  
+  do { 
+    printf("\e[1;1H\e[2J");
+    printf("\nYou chosed the matrix\n\n");
+    display_Matrix(*A);
+
+    if (A->nb_r == 1) {
+      nb_row = 1;
+    } else {
+      printf("\nEnter the number of the row that will be modified (1 -> %d): ",A->nb_r);
+      scanf("%d",&nb_row);
     }
-  } while(A->nb_r<1);
+    printf("\nEnter the value of the scalar number: ");
+    scanf("%d",&scal);
 
-  A = newMatrix(A->nb_r, A->nb_r);
+    perfProdR(A, nb_row-1, scal);
 
-  enterValues(A);
-  printf("\n");
-  display_Matrix(*A);
+    printf("\nThe matrix is now\n\n");
+    display_Matrix(*A);
+    printf("\nDo you want to continue with the same matrix ? (y/n): ");
+    clearBuffer();
+    fgets(restartSame, 2, stdin);
+    printf("\n");
+  } while(!strcmp(restartSame, "y"));
 
-  Get_trace(A);
-  printf("\nThe trace of the matrix is equal to %d.\n\n",A->trace);
+  if (!A->is_saved) { inputSaveM(Am,A,"matrix"); }
+}
+
+void sumRows(Matrix* A, int nb_r1, int nb_r2, int scal)
+{
+  for (int j=0; j<A->nb_c; ++j) {
+    A->arr[nb_r1][j] += A->arr[nb_r2][j] * scal;
+  }
+}
+
+void swapRows(Matrix* A, int nb_r1, int nb_r2)
+{
+  int temp;
+  for (int j=0; j<A->nb_c; ++j) {
+    temp = A->arr[nb_r1][j];
+    A->arr[nb_r1][j] = A->arr[nb_r2][j];
+    A->arr[nb_r2][j] = temp;
+  }
 }
 
 Matrix* Get_transpose(Matrix A){
@@ -226,13 +289,13 @@ Matrix* Get_transpose(Matrix A){
   return T;
 }
 
-void Transpose()
+void Transpose(ArrM* Am)
 {
   Matrix* A;
   Matrix* T;
+  int size_check[3] = {0,0,0};
 
-  A = newMatrix(0,0);
-  enterValues(A);
+  A = chooseNSmat(*Am, 0, size_check, "D");
 
   T = Get_transpose(*A);
   
@@ -242,30 +305,9 @@ void Transpose()
   printf("\nis\n\n");
   display_Matrix(*T);
   printf("\n");
-}
-
-void productLine(Matrix* A, int nb_row, int scal)
-{
-  for (int j=0; j<A->nb_c; ++j) {
-    A->arr[nb_row][j] *= scal;
-  }
-}
-
-void sumLines(Matrix* A, int nb_r1, int nb_r2, int scal)
-{
-  for (int j=0; j<A->nb_c; ++j) {
-    A->arr[nb_r1][j] += A->arr[nb_r2][j] * scal;
-  }
-}
-
-void swapLines(Matrix* A, int nb_r1, int nb_r2)
-{
-  int temp;
-  for (int j=0; j<A->nb_c; ++j) {
-    temp = A->arr[nb_r1][j];
-    A->arr[nb_r1][j] = A->arr[nb_r2][j];
-    A->arr[nb_r2][j] = temp;
-  }
+  
+  if (!A->is_saved) { inputSaveM(Am,A,"first matrix"); }
+  inputSaveM(Am,T,"transpose of the first matrix");
 }
 
 void assignArr(Matrix* B, Matrix A)
@@ -298,4 +340,28 @@ void assignMatrix(Matrix* B, Matrix A)
   B->is_sym = A.is_sym;
   B->is_asym = A.is_asym; 
   B->is_inv = A.is_inv; 
+}
+
+int isRightSize(Matrix B, int size_check[3]) {
+  int right_size = 0;
+
+  switch (size_check[0]) {
+    //sum
+    case -1: 
+      right_size = (B.nb_r == size_check[1] && B.nb_c == size_check[2]); 
+      if (!right_size) { 
+        printf("\e[1;1H\e[2J");
+        printf("\nYou must choose a matrix with the same size as the first matrix (%d rows and %d columns).\n",size_check[1], size_check[2]); 
+      }
+      break;
+    //product
+    case -2: 
+      right_size = (B.nb_r == size_check[1]); // index 1 because: see comments in chooseNSmat in user.c  
+      if (!right_size) {
+        printf("\e[1;1H\e[2J");
+        printf("\nYou must choose a matrix with the same amount of rows as the amount of columns of the first matrix (%d rows needed)", size_check[1]);
+      }
+      break;
+  }
+  return (right_size) ? -size_check[0] : size_check[0];
 }

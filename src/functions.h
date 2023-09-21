@@ -20,19 +20,21 @@ Matrix* Get_transpose(Matrix A);
 void Invert(Matrix A);
 
 //operations on one matrix
-void Trace();
+void Trace(ArrM* Am);
 void Get_trace(Matrix* A);
-void Get_rank(Matrix A);
+void ProductRow(ArrM* Am);
+//void Get_rank(Matrix A);
 
 //useful in functions
 Matrix* Get_productScalar(Matrix A, int sc);
 int enoughZeros(Matrix A, int start_i, int start_j, int end_i, int end_j);
 int NbsameElemDiag(Matrix A, int elem);
 int are_Equal(Matrix A, Matrix B);
+int isRightSize(Matrix B, int size_check[3]);
 
 //elementary row operations
-void productLine(Matrix* A, int nb_row, int scal);
-void sumLines(Matrix* A, int nb_r1, int nb_r2, int scal);
-void swapLines(Matrix* A, int nb_r1, int nb_r2);
+void perfProdR(Matrix* A, int nb_row, int scal);
+void perfSumR(Matrix* A, int nb_r1, int nb_r2, int scal);
+void perfswapR(Matrix* A, int nb_r1, int nb_r2);
 
 #endif 

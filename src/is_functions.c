@@ -3,6 +3,7 @@
 #include "struct.h"
 #include "user.h"
 #include "functions.h"
+#include "save.h"
 
 void is_RowM(Matrix* A)
 {
@@ -13,22 +14,24 @@ void is_RowM(Matrix* A)
   }
 }
 
-void is_Row()
+void is_Row(ArrM* Am)
 {
-  Matrix* A; 
-  A = newMatrix(0,0);
-  enterValues(A);
+  Matrix* A;
+  int size_check[3] = {0,0,0};
+
+  A = chooseNSmat(*Am, 0, size_check, "D");
 
   is_RowM(A);
+
+  printf("\nThe matrix\n\n");
+  display_Matrix(*A);
   if (A->is_row){
-    printf("\nThe matrix\n\n");
-    display_Matrix(*A);
     printf("\nis a row one.\n\n");
   } else {
-    printf("\nThe matrixn\n");
-    display_Matrix(*A);
-    printf("isn't a row one.\n\n");
+    printf("\nisn't a row one.\n\n");
   }
+
+  if (!A->is_saved) { inputSaveM(Am,A,"matrix"); }
 }
 
 void is_ColumnM(Matrix* A)
@@ -40,23 +43,24 @@ void is_ColumnM(Matrix* A)
   }
 }
 
-void is_Column()
-{
+void is_Column(ArrM* Am)
+{  
   Matrix* A;
-  A = newMatrix(0,0);
-  enterValues(A);
-  
+  int size_check[3] = {0,0,0};
+
+  A = chooseNSmat(*Am, 0, size_check, "D");
+
   is_ColumnM(A);
 
+  printf("\nThe matrix\n\n");
+  display_Matrix(*A);
   if (A->is_column){
-    printf("\nThe matrix\n\n");
-    display_Matrix(*A);
     printf("\nis a column one.\n\n");
   } else {
-    printf("\nThe matrix\n\n");
-    display_Matrix(*A);
     printf("\nisn't a column one.\n\n");
   }
+  
+  if (!A->is_saved) { inputSaveM(Am,A,"matrix"); }
 }
 
 void is_NullM(Matrix* A)
@@ -70,23 +74,23 @@ void is_NullM(Matrix* A)
   }
 }
 
-void is_Null()
-{
+void is_Null(ArrM* Am)
+{ 
   Matrix* A;
-  A = newMatrix(0,0);
-  enterValues(A);
+  int size_check[3] = {0,0,0};
+
+  A = chooseNSmat(*Am, 0, size_check, "D");
 
   is_NullM(A);
   
+  printf("\nThe matrix\n\n");
+  display_Matrix(*A);
   if (A->is_null){
-    printf("\nThe matrix\n\n");
-    display_Matrix(*A);
     printf("\nis null.\n\n");
   } else {
-    printf("\nThe matrix\n\n");
-    display_Matrix(*A);
     printf("\nisn't null.\n\n");
-    }
+  }
+  if (!A->is_saved) { inputSaveM(Am,A,"matrix"); }
 }
 
 void is_SquareM(Matrix* A)
@@ -98,24 +102,23 @@ void is_SquareM(Matrix* A)
   }
 }
 
-void is_Square()
-{
+void is_Square(ArrM* Am)
+{ 
   Matrix* A;
-  
-  A = newMatrix(0,0);
-  enterValues(A);
+  int size_check[3] = {0,0,0};
+
+  A = chooseNSmat(*Am, 0, size_check, "D");
 
   is_SquareM(A);
 
+  printf("\nThe matrix\n\n");
+  display_Matrix(*A);
   if (A->is_sq){
-    printf("\nThe matrix\n\n");
-    display_Matrix(*A);
     printf("\nis a square one.\n\n");
   } else {
-    printf("\nThe matrix\n\n");
-    display_Matrix(*A);
     printf("\nisn't a square one.\n\n");
   }
+  if (!A->is_saved) { inputSaveM(Am,A,"matrix"); }
 }
 
 void is_IdentityM(Matrix* A)
@@ -143,36 +146,34 @@ void is_IdentityM(Matrix* A)
   }
 }
 
-void is_Identity()
-{
+void is_Identity(ArrM* Am)
+{ 
   Matrix* A;
-  A = newMatrix(0,0);
+  int size_check[3] = {0,0,0};
 
-  is_SquareM(A);
-  if (A->is_sq){
-    enterValues(A);
-  }
+  A = chooseNSmat(*Am, 1, size_check, "D");
+
   is_IdentityM(A);
 
   if (A->is_sq){
+    printf("The matrix\n\n");
+    display_Matrix(*A);
     if (A->is_id){
-      printf("The matrix\n\n");
-      display_Matrix(*A);
       printf("\nis an identity one.\n\n");      
     } else {
-      printf("The matrix\n\n");
-      display_Matrix(*A);
       printf("\nisn't an identity one.\n\n"); 
     }
+    if (!A->is_saved) { inputSaveM(Am,A,"matrix"); }
+
   } else {
-      printf("The matrix can't be an identity one because it isn't a square one.\n\n");
+      printf("\nThe matrix can't be an identity one because it isn't a square one.\n\n");
   }
 }
 
 void is_DiagonalM(Matrix* A)
 {
   if (A->is_sq < 0){
-    is_Square(A);
+    is_SquareM(A);
   }
   if (A->is_sq){
     int zero, i, j;
@@ -200,35 +201,27 @@ void is_DiagonalM(Matrix* A)
   }
 }
 
-void is_Diagonal()
+void is_Diagonal(ArrM* Am)
 {
   Matrix* A;
-  
-  A = newMatrix(0,0);
-  
-  if (A->is_id == 1){
-    A->is_diag = 1;
-  } else {
-    is_SquareM(A);
+  int size_check[3] = {0,0,0};
 
-    if (A->is_sq){
-      enterValues(A);
-    }
-    is_DiagonalM(A);
-  }
+  A = chooseNSmat(*Am, 1, size_check, "D");
+
+  is_DiagonalM(A);
 
   if (A->is_sq){
+    printf("\nThe matrix\n\n");
+    display_Matrix(*A);
     if (A->is_diag){
-      printf("\nThe matrix\n\n");
-      display_Matrix(*A);
       printf("\nis a diagonal one.\n\n");      
     } else {
-      printf("\nThe matrix\n\n");
-      display_Matrix(*A);
       printf("\nisn't a diagonal one.\n\n");      
     }
+    if (!A->is_saved) { inputSaveM(Am,A,"matrix"); }
+
   } else {
-      printf("The matrix can't be diagonal because it isn't a square one.\n\n");
+      printf("\nThe matrix can't be diagonal because it isn't a square one.\n\n");
   }
 }
 
@@ -253,33 +246,26 @@ void is_ScalarM(Matrix* A)
   }
 }
 
-void is_Scalar()
+void is_Scalar(ArrM* Am)
 {
   Matrix* A;
-  
-  A = newMatrix(0,0);
-  is_SquareM(A);
-  if (A->is_sq){
-    enterValues(A);
-  }
-  if (A->is_id == 1 || A->is_null == 1){
-    A->is_scal = 1;
-  } else {
-    is_ScalarM(A);
-  }
+  int size_check[3] = {0,0,0};
 
+  A = chooseNSmat(*Am, 1, size_check, "D");
+
+  is_ScalarM(A);
+  
   if (A->is_sq){
+    printf("\nThe matrix\n\n");
+    display_Matrix(*A);
     if (A->is_scal){
-      printf("\nThe matrix\n\n");
-      display_Matrix(*A);
       printf("\nis a scalar one.\n\n");      
     } else {
-      printf("\nThe matrix\n\n");
-      display_Matrix(*A);
       printf("\nisn't a scalar one.\n\n");      
     }
+    if (!A->is_saved) { inputSaveM(Am,A,"matrix"); }
   } else {
-      printf("The matrix can't be scalar because it isn't a square one.\n\n");
+      printf("\nThe matrix can't be scalar because it isn't a square one.\n\n");
   }
 }
 
@@ -323,16 +309,15 @@ void is_TriangularM(Matrix* A)
   } 
 }
 
-void is_Triangular()
+void is_Triangular(ArrM* Am)
 {
   int str_up, str_l, up, low;
-  Matrix* A;
-  A = newMatrix(0,0);
 
-  is_SquareM(A);
-  if (A->is_sq){
-    enterValues(A);
-  }
+  Matrix* A;
+  int size_check[3] = {0,0,0};
+
+  A = chooseNSmat(*Am, 1, size_check, "D");
+
   is_TriangularM(A);
 
   str_up = A->is_str_up_tr == 1;
@@ -341,37 +326,26 @@ void is_Triangular()
   low = A->is_low_tr == 1;
 
   if (A->is_sq){
+    printf("The matrix\n\n");
+    display_Matrix(*A);
     if (str_up && str_l) {
-      printf("The matrix\n\n");
-      display_Matrix(*A);
       printf("\nis null (both strictly upper triangular and strictly lower triangular).\n\n");      
     } else if (str_up) {
-      printf("The matrix\n\n");
-      display_Matrix(*A);
       printf("\nis a strictly upper triangular one.\n\n"); 
     } else if (str_l) {
-      printf("The matrix\n\n");
-      display_Matrix(*A);
       printf("\nis a strictly lower triangular one.\n\n");
     } else if (up && low) {
-      printf("The matrix\n\n");
-      display_Matrix(*A);
       printf("\nis a diagonal one (both upper triangular and lower triangular).\n\n"); 
     } else if (up) {
-      printf("The matrix\n\n");
-      display_Matrix(*A);
       printf("\nis an upper triangular one.\n\n"); 
     } else if (low) {
-      printf("The matrix\n\n");
-      display_Matrix(*A);
       printf("\nis a lower triangular one.\n\n"); 
     } else {
-      printf("The matrix\n\n");
-      display_Matrix(*A);
       printf("\nisn't triangular.\n\n"); 
     }
+    if (!A->is_saved) { inputSaveM(Am,A,"matrix"); }
   } else {
-      printf("The matrix can't be upper triangular because it isn't a square one.\n\n");
+      printf("\nThe matrix can't be triangular because it isn't a square one.\n\n");
   }
 }
 
@@ -389,29 +363,27 @@ void is_SymmetricM(Matrix* A) {
   }
 }
 
-void is_Symmetric() 
+void is_Symmetric(ArrM* Am) 
 {
   Matrix* A;
-  A = newMatrix(0,0);
+  int size_check[3] = {0,0,0};
 
-  is_SquareM(A);
-  if (A->is_sq){
-    enterValues(A);
-  }
+  A = chooseNSmat(*Am, 1, size_check, "D");
+
   is_SymmetricM(A);
 
   if (A->is_sq){
+    printf("The matrix\n\n");
+    display_Matrix(*A);
     if (A->is_sym){
-      printf("The matrix\n\n");
-      display_Matrix(*A);
       printf("\nis a symmetric one.\n\n");      
     } else {
-      printf("The matrix\n\n");
-      display_Matrix(*A);
       printf("\nisn't a symmetric one.\n\n"); 
     }
+    if (!A->is_saved) { inputSaveM(Am,A,"matrix"); }
+
   } else {
-      printf("The matrix can't be symmetric because it isn't a square one.\n\n");
+      printf("\nThe matrix can't be symmetric because it isn't a square one.\n\n");
   }
 }
 
@@ -431,29 +403,26 @@ void is_AntiSymmetricM(Matrix* A)
   }
 }
 
-void is_AntiSymmetric()
+void is_AntiSymmetric(ArrM* Am)
 {
   Matrix* A;
-  A = newMatrix(0,0);
+  int size_check[3] = {0,0,0};
 
-  is_SquareM(A);
-  if (A->is_sq){
-    enterValues(A);
-  }
+  A = chooseNSmat(*Am, 1, size_check, "D");
+
   is_AntiSymmetricM(A);
 
   if (A->is_sq){
+    printf("The matrix\n\n");
+    display_Matrix(*A);
     if (A->is_asym){
-      printf("The matrix\n\n");
-      display_Matrix(*A);
       printf("\nis an antisymmetric one.\n\n");      
     } else {
-      printf("The matrix\n\n");
-      display_Matrix(*A);
       printf("\nisn't an antisymmetric one.\n\n"); 
     }
+    if (!A->is_saved) { inputSaveM(Am,A,"matrix"); }
   } else {
-      printf("The matrix can't be antisymmetric because it isn't a square one.\n\n");
+      printf("\nThe matrix can't be antisymmetric because it isn't a square one.\n\n");
   }
 }
 

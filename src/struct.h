@@ -2,6 +2,8 @@
 #define __STRUCT_H_
 
 typedef struct {
+  //the name of the matrix when saved
+  char name[2];
   //the array that contains the elements of the Matrix
   int** arr;
   //number of rows
@@ -12,6 +14,8 @@ typedef struct {
   int trace;
   //value of the rank
   int rk;
+  //is the matrix saved?
+  int is_saved;
   //is the matrix a row one?
   int is_row;
   //is the matrix a column one?
@@ -41,5 +45,10 @@ typedef struct {
   //is the matrix an invertible one? 
   int is_inv;
 } Matrix;
+
+typedef struct {
+  int nb_mat;
+  Matrix** arr;
+} ArrM;
 
 #endif
